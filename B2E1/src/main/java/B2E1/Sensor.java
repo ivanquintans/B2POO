@@ -148,14 +148,14 @@ public class Sensor {
     public float media(){
 
         if(this.datos.size()==0){
-            return Float.MIN_NORMAL; //SI NO HAY LIST DEVOLVEMOS ERROR QUE PODAMOS IDENTIFICAR COMO ERROR
-
+            return Float.MIN_VALUE; //SI NO HAY LIST DEVOLVEMOS ERROR QUE PODAMOS IDENTIFICAR COMO ERROR
         }
         float media=0;
         for (int i=0;i<this.datos.size();i++){
-
             media+= this.datos.get(i);
         }
+
+        media= media/this.datos.size();
 
         return media ; //devolvemos el valor
 
@@ -202,6 +202,7 @@ public class Sensor {
             return rango;
     }
 
+    /*no me imprime bien*/
     public String imprimirDatos() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los productos. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
@@ -251,8 +252,10 @@ public class Sensor {
                 + (this.estancia!=null ? " \"destino\" : \"" +  this.estancia + "\",\n" : "")
                 + (this.rango!=null ? " \"rango\"  " +  this.imprimirRango() + ",\n" : "")
                 + (this.datos!=null ? " \"valores\" : " +  this.imprimirDatos() + ",\n" : "")
-                + (this.minimo()!=Float.MAX_VALUE ? " \"peso\" : \"" +  this.minimo() + "\",\n" : "")
-                + (this.maximo()!=Float.MIN_VALUE ? " \"precio\" : \"" +  this.maximo() + "\",\n" : "")
+                + (this.precio>0 ? " \"precio\"  " +  this.precio + ",\n" : "")
+                + (this.minimo()!=Float.MAX_VALUE ? " \"minimo\" : \"" +  this.minimo() + "\",\n" : "")
+                + (this.maximo()!=Float.MIN_VALUE ? " \"máximo\" : \"" +  this.maximo() + "\",\n" : "")
+                + (this.media()!=Float.MIN_VALUE ? " \"media\" : \"" +  this.media() + "\",\n" : "")
                 + "}";
     }
 

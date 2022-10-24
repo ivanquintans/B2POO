@@ -22,7 +22,7 @@ public class Estancia {
 
         //debemos también declarar nuestro set mediante un hash set
         this.sensores = new HashSet<Sensor>();
-        this.coste=0;
+        this.coste= 0f;
 
         if (nombre != null) {
             this.nombre = nombre;
@@ -85,6 +85,12 @@ public class Estancia {
 
         //en otro caso lo añadimos y devolvemos false
         this.sensores.add(sensor); //añadimos el sensor a sensores
+
+        //calculamos el coste como la suma del precio de los sensores
+
+        this.coste += sensor.getPrecio();
+
+
         return true;
 
     }
@@ -222,11 +228,13 @@ public class Estancia {
     public String imprimirSensores() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
+        boolean flag=false;
         for (Sensor i :this.sensores) {
+            if(flag){
+                dato+= ",";
+            }
             dato += "\"" + i.getId() + "\"";
-            //if (i < this.datos.size() - 1) { //escribimos la coma en todos los sitios menos en el ultimo lugar
-            dato += ",";
-            //}
+            flag=true;
         }
         dato += "]";
         return dato;
@@ -234,10 +242,15 @@ public class Estancia {
 
     public String imprimirSensoresMedia() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
+        int flag=0;
 
         for (Sensor i :this.sensores) {
-            dato += "{" +"\"" + i.getId() + "\""+ "\"" + i.media()+ "\""+"}" +"\n";
-            dato += "\t\t\t\t";
+            if(flag!=0){
+                dato+="\n";
+                dato += "\t\t\t\t\t";
+            }
+            dato += "{" +"\"" + i.getId() + "\"" + "," + "\"" + i.media()+ "\""+"}";
+            flag++;
         }
         dato += "]";
         return dato;

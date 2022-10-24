@@ -31,6 +31,9 @@ public class PrincipalB2E1 {
         //damos de alta a los sensores creadaos
 
         estancia1.darAlta(sensor1);
+        estancia1.darAlta(sensor2);
+        estancia1.darAlta(sensor3);
+        estancia1.darAlta(sensor4);
 
         //APARTADO E
         //introducir los valores de los sensores
@@ -57,9 +60,9 @@ public class PrincipalB2E1 {
         sensor2.nuevoDato(23.5f);
         sensor2.nuevoDato(24.1f);
         sensor2.nuevoDato(23.2f);
-        sensor2.nuevoDato(-23.5f);
+        sensor2.nuevoDato(23.5f);
         sensor2.nuevoDato(24.6f);
-        sensor2.nuevoDato(-23.8f);
+        sensor2.nuevoDato(23.8f);
         sensor2.nuevoDato(23.9f);
         sensor2.nuevoDato(24.1f);
         sensor2.nuevoDato(24.3f);
@@ -98,29 +101,30 @@ public class PrincipalB2E1 {
         //APARTADO F
         //mostramos por pantalla los sensores
 
-        System.out.println("APARTADO F:\n");
+        System.out.println("\nAPARTADO F:\n");
 
         System.out.println("SENSOR1:\n");
 
         System.out.println(sensor1);
 
-        System.out.println("SENSOR2:\n");
+        System.out.println("\nSENSOR2:\n");
 
-        System.out.println(sensor1);
+        System.out.println(sensor2);
 
-        System.out.println("SENSOR3:\n");
+        System.out.println("\nSENSOR3:\n");
 
-        System.out.println(sensor1);
+        System.out.println(sensor3);
 
-        System.out.println("SENSOR4:\n");
+        System.out.println("\nSENSOR4:\n");
 
-        System.out.println(sensor1);
-
-
+        System.out.println(sensor4);
 
         //APARTADO G
+        //mostrar por pantalla la estancia1
 
-        //introducimos el paquete creado en f en el conjunto de paquetes enviados por la empresa
+        System.out.println("\nAPARTADO G:\n");
+
+        System.out.println(estancia1);
 
 
 
