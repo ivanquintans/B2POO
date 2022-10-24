@@ -201,7 +201,6 @@ public class Estancia {
 
     }
 
-    /*VALORES IGUALES ???*/
     public ArrayList<Float> valoresSuperiores(String id, float valor) {
 
         ArrayList<Float> valores = new ArrayList<>();//declaramos un array list para poder devolver los valores
@@ -217,6 +216,29 @@ public class Estancia {
         }
 
         return valores;
+    }
+
+    public String imprimirSensores() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
+        String dato = "["; //asignamos a nuestro string en primer lugar el corchete
+
+        for (Sensor i :this.sensores) {
+            dato += "\"" + i.getId() + "\"";
+            //if (i < this.datos.size() - 1) { //escribimos la coma en todos los sitios menos en el ultimo lugar
+            dato += ",";
+            //}
+        }
+        dato += "]";
+        return dato;
+    }
+
+    public String imprimirSensoresMedia() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
+        String dato = "["; //asignamos a nuestro string en primer lugar el corchete
+
+        for (Sensor i :this.sensores) {
+            dato += "{" +"\"" + i.getId() + "\""+ "\"" + i.media()+ "\""+"}" +"\n";
+        }
+        dato += "]";
+        return dato;
     }
 
     @Override
@@ -247,9 +269,9 @@ public class Estancia {
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\":\"" +  this.nombre + "\",\n" : "")
                 + (this.planta>=2 ? " \"planta\":\"" +  this.planta + "\",\n" : "")
-                + (this.sensores!=null ? " \"sensores\":\"" +  this.sensores + "\",\n" : "")
+                + (this.sensores!=null ? " \"sensores\":\"" +  imprimirSensores() + "\",\n" : "")
                 + (this.coste>=0 ? " \"coste\":" +  this.coste + ",\n" : "")
-                + (this.datos!=null ? " \"valores\":" +  this.imprimirDatos() + ",\n" : "")
+                + (this.sensores!=null ? " \"sensores_media\":" +  imprimirSensoresMedia() + ",\n" : "")
 
                 + "}";
     }
