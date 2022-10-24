@@ -198,7 +198,7 @@ public class Sensor {
         String rango = "["; //asignamos a nuestro string en primer lugar el corchete
             rango += "\"" + this.limiteInferior() + "\""+",";
             rango += "\"" + this.limiteSuperior() + "\"";
-            rango += "],";
+            rango += "]";
             return rango;
     }
 
@@ -242,17 +242,17 @@ public class Sensor {
         return true;
     }
 
-
+    /*Revisar espcios*/
     @Override
     public String toString(){
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
-                + (this.id.equals("ID-NO-VALIDA") ? " \"id\":\"" +  this.id + "\",\n" : "")
-                + (this.tipo.equals("NOT-VALID-TYPE") ? " \"tipo\":\"" +  this.tipo + "\",\n" : "")
-                + (this.estancia!=null ? " \"destino\":\"" +  this.estancia + "\",\n" : "")
-                + (this.rango!=null ? " \"rango\":" +  this.imprimirRango() + ",\n" : "")
-                + (this.datos!=null ? " \"valores\":" +  this.imprimirDatos() + ",\n" : "")
-                + (this.minimo()!=Float.MAX_VALUE ? " \"peso\":\"" +  this.minimo() + "\",\n" : "")
-                + (this.maximo()!=Float.MIN_VALUE ? " \"precio\":\"" +  this.maximo() + "\",\n" : "")
+                + (!this.id.equals("ID-NO-VALIDA") ? " \"id\" : \"" +  this.id + "\",\n" : "")
+                + (!this.tipo.equals("NOT-VALID-TYPE") ? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
+                + (this.estancia!=null ? " \"destino\" : \"" +  this.estancia + "\",\n" : "")
+                + (this.rango!=null ? " \"rango\"  " +  this.imprimirRango() + ",\n" : "")
+                + (this.datos!=null ? " \"valores\" : " +  this.imprimirDatos() + ",\n" : "")
+                + (this.minimo()!=Float.MAX_VALUE ? " \"peso\" : \"" +  this.minimo() + "\",\n" : "")
+                + (this.maximo()!=Float.MIN_VALUE ? " \"precio\" : \"" +  this.maximo() + "\",\n" : "")
                 + "}";
     }
 

@@ -11,7 +11,31 @@ public class PrincipalB2E1 {
         Sensor sensor3 = new Sensor("200","sonido",new float[]{0,120f},30.5f);
         Sensor sensor4 = new Sensor("201","sonido",new float[]{0,110f},28.3f);
 
-        //sensor 1 //añadimos valores
+
+        //APARTADO B
+        //mostramos por pantalla limites superiores y inferiores
+
+        System.out.println("APARTADO B:\n");
+
+        System.out.println("Sensor 1:" + sensor1.limiteInferior() + " , " + sensor1.limiteSuperior());
+        System.out.println("Sensor 2:" + sensor2.limiteInferior() + " , " + sensor2.limiteSuperior());
+        System.out.println("Sensor 3:" + sensor3.limiteInferior() + " , " + sensor3.limiteSuperior());
+        System.out.println("Sensor 4:" + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
+
+        //APARTADO C
+        //crear una estancia
+
+        Estancia estancia1 = new Estancia("Aula01",2);
+
+        //APARTADO D
+        //damos de alta a los sensores creadaos
+
+        estancia1.darAlta(sensor1);
+
+        //APARTADO E
+        //introducir los valores de los sensores
+
+        //sensor 1
 
         sensor1.nuevoDato(23.4f);
         sensor1.nuevoDato(23.4f);
@@ -26,38 +50,71 @@ public class PrincipalB2E1 {
         sensor1.nuevoDato(24.3f);
         sensor1.nuevoDato(25.4f);
 
+        //sensor2
 
-        System.out.println("APARTADO A:\n");
+        sensor2.nuevoDato(23.4f);
+        sensor2.nuevoDato(23.4f);
+        sensor2.nuevoDato(23.5f);
+        sensor2.nuevoDato(24.1f);
+        sensor2.nuevoDato(23.2f);
+        sensor2.nuevoDato(-23.5f);
+        sensor2.nuevoDato(24.6f);
+        sensor2.nuevoDato(-23.8f);
+        sensor2.nuevoDato(23.9f);
+        sensor2.nuevoDato(24.1f);
+        sensor2.nuevoDato(24.3f);
+        sensor2.nuevoDato(25.4f);
 
-        //APARTADO B
-        //mostramos por pantalla limites superiores y inferiores
+        //sensor3
 
-        System.out.println("Sensor 1:" + sensor1.limiteInferior() + "\"" + sensor1.limiteSuperior());
-        System.out.println("Sensor 2:" + sensor1.limiteInferior() + "\"" + sensor1.limiteSuperior());
-        System.out.println("Sensor 3:" + sensor1.limiteInferior() + "\"" + sensor1.limiteSuperior());
-        System.out.println("Sensor 4:" + sensor1.limiteInferior() + "\"" + sensor1.limiteSuperior());
+        sensor3.nuevoDato(23.4f);
+        sensor3.nuevoDato(23.4f);
+        sensor3.nuevoDato(23.5f);
+        sensor3.nuevoDato(24.1f);
+        sensor3.nuevoDato(23.2f);
+        sensor3.nuevoDato(-23.5f);
+        sensor3.nuevoDato(24.6f);
+        sensor3.nuevoDato(-23.8f);
+        sensor3.nuevoDato(23.9f);
+        sensor3.nuevoDato(24.1f);
+        sensor3.nuevoDato(24.3f);
+        sensor3.nuevoDato(25.4f);
 
+        //sensor4
 
-
-        //APARTADO C
-        //crear una estancia
-
-
-        //APARTADO D
-
-        //mostramos por pantalla
-
-
-
-        //APARTADO E
-
-        //escribimos la empresa creada en b en el atributo mensajeria de los paquetes creados en a
-
-
+        sensor4.nuevoDato(23.4f);
+        sensor4.nuevoDato(23.4f);
+        sensor4.nuevoDato(23.5f);
+        sensor4.nuevoDato(24.1f);
+        sensor4.nuevoDato(23.2f);
+        sensor4.nuevoDato(-23.5f);
+        sensor4.nuevoDato(24.6f);
+        sensor4.nuevoDato(-23.8f);
+        sensor4.nuevoDato(23.9f);
+        sensor4.nuevoDato(24.1f);
+        sensor4.nuevoDato(24.3f);
+        sensor4.nuevoDato(25.4f);
 
         //APARTADO F
+        //mostramos por pantalla los sensores
 
-        //creamos un paquete asignandole una id
+        System.out.println("APARTADO F:\n");
+
+        System.out.println("SENSOR1:\n");
+
+        System.out.println(sensor1);
+
+        System.out.println("SENSOR2:\n");
+
+        System.out.println(sensor1);
+
+        System.out.println("SENSOR3:\n");
+
+        System.out.println(sensor1);
+
+        System.out.println("SENSOR4:\n");
+
+        System.out.println(sensor1);
 
 
 

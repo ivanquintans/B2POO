@@ -237,6 +237,7 @@ public class Estancia {
 
         for (Sensor i :this.sensores) {
             dato += "{" +"\"" + i.getId() + "\""+ "\"" + i.media()+ "\""+"}" +"\n";
+            dato += "\t\t\t\t";
         }
         dato += "]";
         return dato;
@@ -263,16 +264,16 @@ public class Estancia {
         }
         return true;
     }
-    /*imprimir sensores*/
+    /*Revisar espcios*/
     /*Acabar esto*/
     @Override
     public String toString(){
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
-                + (this.nombre!=null ? " \"nombre\":\"" +  this.nombre + "\",\n" : "")
-                + (this.planta>=2 ? " \"planta\":\"" +  this.planta + "\",\n" : "")
-                + (this.sensores!=null ? " \"sensores\":\"" +  imprimirSensores() + "\",\n" : "")
-                + (this.coste>=0 ? " \"coste\":" +  this.coste + ",\n" : "")
-                + (this.sensores!=null ? " \"sensores_media\":" +  imprimirSensoresMedia() + ",\n" : "")
+                + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
+                + (this.planta>=2 ? " \"planta\" : \"" +  this.planta + "\",\n" : "")
+                + (!this.sensores.isEmpty() ? " \"sensores\" : \"" +  imprimirSensores() + "\",\n" : "")
+                + (this.coste>=0 ? " \"coste\" : " +  this.coste + ",\n" : "")
+                + (!this.sensores.isEmpty() ? " \"sensores_media\" : " +  imprimirSensoresMedia() + ",\n" : "")
 
                 + "}";
     }
