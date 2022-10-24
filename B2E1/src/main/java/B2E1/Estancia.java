@@ -218,6 +218,7 @@ public class Estancia {
         return valores;
     }
 
+    /*Controlar la coma*/
     public String imprimirSensores() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
