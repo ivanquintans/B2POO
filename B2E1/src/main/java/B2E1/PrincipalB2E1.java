@@ -1,5 +1,7 @@
 package B2E1;
 
+import java.util.ArrayList;
+
 public class PrincipalB2E1 {
     public static void main(String[] args) {
 
@@ -17,10 +19,10 @@ public class PrincipalB2E1 {
 
         System.out.println("APARTADO B:\n");
 
-        System.out.println("Sensor 1:" + sensor1.limiteInferior() + " , " + sensor1.limiteSuperior());
-        System.out.println("Sensor 2:" + sensor2.limiteInferior() + " , " + sensor2.limiteSuperior());
-        System.out.println("Sensor 3:" + sensor3.limiteInferior() + " , " + sensor3.limiteSuperior());
-        System.out.println("Sensor 4:" + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
+        System.out.println("Sensor 1: " + sensor1.limiteInferior() + " , " + sensor1.limiteSuperior());
+        System.out.println("Sensor 2: " + sensor2.limiteInferior() + " , " + sensor2.limiteSuperior());
+        System.out.println("Sensor 3: " + sensor3.limiteInferior() + " , " + sensor3.limiteSuperior());
+        System.out.println("Sensor 4: " + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
 
         //APARTADO C
         //crear una estancia
@@ -55,48 +57,48 @@ public class PrincipalB2E1 {
 
         //sensor2
 
-        sensor2.nuevoDato(23.4f);
-        sensor2.nuevoDato(23.4f);
-        sensor2.nuevoDato(23.5f);
-        sensor2.nuevoDato(24.1f);
+        sensor2.nuevoDato(22.1f);
+        sensor2.nuevoDato(-22.1f);
+        sensor2.nuevoDato(22.5f);
+        sensor2.nuevoDato(22.4f);
+        sensor2.nuevoDato(22.9f);
+        sensor2.nuevoDato(21.2f);
+        sensor2.nuevoDato(21.5f);
+        sensor2.nuevoDato(21.1f);
+        sensor2.nuevoDato(20.9f);
+        sensor2.nuevoDato(-23.1f);
+        sensor2.nuevoDato(22.8f);
         sensor2.nuevoDato(23.2f);
-        sensor2.nuevoDato(23.5f);
-        sensor2.nuevoDato(24.6f);
-        sensor2.nuevoDato(23.8f);
-        sensor2.nuevoDato(23.9f);
-        sensor2.nuevoDato(24.1f);
-        sensor2.nuevoDato(24.3f);
-        sensor2.nuevoDato(25.4f);
 
         //sensor3
 
-        sensor3.nuevoDato(23.4f);
-        sensor3.nuevoDato(23.4f);
-        sensor3.nuevoDato(23.5f);
-        sensor3.nuevoDato(24.1f);
-        sensor3.nuevoDato(23.2f);
-        sensor3.nuevoDato(-23.5f);
-        sensor3.nuevoDato(24.6f);
-        sensor3.nuevoDato(-23.8f);
-        sensor3.nuevoDato(23.9f);
-        sensor3.nuevoDato(24.1f);
-        sensor3.nuevoDato(24.3f);
-        sensor3.nuevoDato(25.4f);
+        sensor3.nuevoDato(21.4f);
+        sensor3.nuevoDato(-21.3f);
+        sensor3.nuevoDato(21.2f);
+        sensor3.nuevoDato(-21.2f);
+        sensor3.nuevoDato(21.2f);
+        sensor3.nuevoDato(21.5f);
+        sensor3.nuevoDato(22.3f);
+        sensor3.nuevoDato(21.8f);
+        sensor3.nuevoDato(22.1f);
+        sensor3.nuevoDato(21.7f);
+        sensor3.nuevoDato(-21.9f);
+        sensor3.nuevoDato(22.5f);
 
         //sensor4
 
-        sensor4.nuevoDato(23.4f);
-        sensor4.nuevoDato(23.4f);
-        sensor4.nuevoDato(23.5f);
-        sensor4.nuevoDato(24.1f);
-        sensor4.nuevoDato(23.2f);
-        sensor4.nuevoDato(-23.5f);
-        sensor4.nuevoDato(24.6f);
-        sensor4.nuevoDato(-23.8f);
-        sensor4.nuevoDato(23.9f);
-        sensor4.nuevoDato(24.1f);
-        sensor4.nuevoDato(24.3f);
-        sensor4.nuevoDato(25.4f);
+        sensor4.nuevoDato(10.1f);
+        sensor4.nuevoDato(10.1f);
+        sensor4.nuevoDato(-5.2f);
+        sensor4.nuevoDato(30.6f);
+        sensor4.nuevoDato(37.8f);
+        sensor4.nuevoDato(45.8f);
+        sensor4.nuevoDato(50.2f);
+        sensor4.nuevoDato(52.1f);
+        sensor4.nuevoDato(46.3f);
+        sensor4.nuevoDato(-10.3f);
+        sensor4.nuevoDato(89.2f);
+        sensor4.nuevoDato(34.3f);
 
         //APARTADO F
         //mostramos por pantalla los sensores
@@ -129,22 +131,112 @@ public class PrincipalB2E1 {
 
 
         //APARTADO H
+        //dar de alta los sensores 5,6,7
 
-        //mostramos por pantalla
-
-
+        estancia1.darAlta("202","sonido",new float[]{0,118f},28.4f); //5
+        estancia1.darAlta("301","humedad",new float[]{0,100f},34.3f); //6
+        estancia1.darAlta("302","humedad",new float[]{0,100f},42.5f); //7
 
         //APARTADO I
+        //mostramos por pantalla limites superiores y inferiores
 
+        System.out.println("\nAPARTADO I\n");
+
+        //tenemos que hacer una funcion que nos permita buscar el sensor que queremos
+
+        ArrayList<String> ids = new ArrayList<>();
+
+        //añadimos los strings que queremos
+        ids.add("202");
+        ids.add("301");
+        ids.add("302");
+
+        System.out.println("Sensor 1: " + sensor1.limiteInferior() + " , " + sensor1.limiteSuperior());
+        System.out.println("Sensor 2: " + sensor2.limiteInferior() + " , " + sensor2.limiteSuperior());
+        System.out.println("Sensor 3: " + sensor3.limiteInferior() + " , " + sensor3.limiteSuperior());
+        System.out.println("Sensor 4: " + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
+
+        int j=4;
+        for(Sensor i : estancia1.getSensores()){
+
+            if (ids.contains(i.getId())){
+                System.out.println("Sensor "+j+": " + i.limiteInferior() + " , " + i.limiteSuperior());
+                j++;
+
+            }
+        }
 
         //APARTADO J
+        //mostramos por pantalla los sensores 5,6,7
 
-        //mostramos los productos de la empresa con valor superior a 20
+        System.out.println("\nAPARTADO J:\n");
+        for(Sensor i : estancia1.getSensores()){
 
+            if (ids.contains(i.getId())){
+                System.out.println("\n"+i);
+
+            }
+        }
 
         //APARTADO K
+        //mostramos por pantalla la estancia1
 
-        //mostramos por pantalla los valores
+        //COMO NO TIENE VALORES ALGUNOS SESNSORES NOS DAN DE MEDIA EL VALOR PARA FLOAT MINIMO
+
+        System.out.println("\nAPARTADO K:\n");
+
+        System.out.println(estancia1);
+
+        //APARTADO l
+        //añadimos los valores
+
+        //sensor 5
+
+        estancia1.nuevoDato("202",5.1f);
+        estancia1.nuevoDato("202",5.2f);
+        estancia1.nuevoDato("202",3.5f);
+        estancia1.nuevoDato("202",25.5f);
+        estancia1.nuevoDato("202",25.5f);
+        estancia1.nuevoDato("202",-29.3f);
+        estancia1.nuevoDato("202",35.1f);
+        estancia1.nuevoDato("202",35.4f);
+        estancia1.nuevoDato("202",-35.1f);
+        estancia1.nuevoDato("202",40.1f);
+        estancia1.nuevoDato("202",49.8f);
+        estancia1.nuevoDato("202",34.5f);
+
+        //sensor 6
+
+        estancia1.nuevoDato("301",31.0f);
+        estancia1.nuevoDato("301",31.2f);
+        estancia1.nuevoDato("301",31.4f);
+        estancia1.nuevoDato("301",32.1f);
+        estancia1.nuevoDato("301",32.4f);
+        estancia1.nuevoDato("301",32.0f);
+        estancia1.nuevoDato("301",32.4f);
+        estancia1.nuevoDato("301",33.4f);
+        estancia1.nuevoDato("301",33.0f);
+        estancia1.nuevoDato("301",32.8f);
+        estancia1.nuevoDato("301",32.9f);
+        estancia1.nuevoDato("301",32.5f);
+
+
+        //sensor 6
+
+        estancia1.nuevoDato("302",-45.1f);
+        estancia1.nuevoDato("302",-45.2f);
+        estancia1.nuevoDato("302",-45.2f);
+        estancia1.nuevoDato("302",-45.2f);
+        estancia1.nuevoDato("302",34.9f);
+        estancia1.nuevoDato("302",34.5f);
+        estancia1.nuevoDato("302",34.6f);
+        estancia1.nuevoDato("302",38.9f);
+        estancia1.nuevoDato("302",37.2f);
+        estancia1.nuevoDato("302",-45.1f);
+        estancia1.nuevoDato("302",36.4f);
+        estancia1.nuevoDato("302",35.4f);
+
+
 
 
 
