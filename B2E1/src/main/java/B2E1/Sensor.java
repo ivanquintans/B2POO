@@ -225,6 +225,15 @@ public class Sensor {
     }
 
     @Override
+    public int hashCode(){
+        int valor=1;
+        final int primo = 67;
+        if(this.id==null)return 0;
+        return primo*valor + this.id.hashCode();
+
+    }
+
+    @Override
     public boolean equals(Object obj) { //metodo equals para paquete
 
         if(this == obj){

@@ -1,4 +1,4 @@
-package B2E1;
+package B2E3;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -120,9 +120,7 @@ public class Estancia {
                 //funcion que añade valores a un sensor (definido en la clase sensor)
                 i.nuevoDato(dato); //añadimos el nuevo dato al sensor deseado
 
-                if(i.getDatos().contains(dato)){
-                    return true;
-                }
+                return true;
             }
         }
         //si no hay ningun sensor con el mismo id que queremos
@@ -147,7 +145,7 @@ public class Estancia {
 
     public Sensor[] sensorMaxValor(String tipo) {
 
-        ArrayList<Sensor> arraySensores = new ArrayList<>();
+        Sensor[] arraySensores = new Sensor[10]; //tamaño 10 ya que no tenemos tantos sensores en la estancia
         float max = Float.MIN_VALUE; //asignamos un valor para comprobar el error
 
         //for para comprobar el maximo
@@ -161,29 +159,26 @@ public class Estancia {
         //si el maximo es ese valor quiere decir que los sesnores tiene rango nulo por lo que lo devuelvo vacio
         if(max == Float.MIN_VALUE) return new Sensor[0];
 
+        int n = 0;
         //bucle para añadir al array los sensores cuyo valor sea igual al máximo
         for (Sensor i : this.sensores) {
             if (i.getTipo().equals(tipo)) {
                 if (i.maximo() == max) {
-                    arraySensores.add(i);
-
+                    n++; //aumentamos el tamaño
+                    arraySensores[n] = i; //añadimos en la posicion n el sensor
                 }
             }
 
         }
-        //recorro el arraylist y copio en el vector mi array
-        Sensor[] solucion = new Sensor[arraySensores.size()];
-        for (int i=0;i<arraySensores.size();i++){
-            solucion[i]=arraySensores.get(i);
-        }
 
-        return solucion; //devolvemos el array final
+        return arraySensores; //devolvemos el array final
+
     }
 
     //mismo codigo que el de maximos pero para minimos
     public Sensor[] sensorMinValor(String tipo) {
 
-        ArrayList<Sensor> arraySensores = new ArrayList<>(); //tamaño 10 ya que no tenemos tantos sensores en la estancia
+        Sensor[] arraySensores = new Sensor[10]; //tamaño 10 ya que no tenemos tantos sensores en la estancia
         float min = Float.MAX_VALUE; //asignamos un valor para comprobar el error
 
         //for para comprobar el maximo
@@ -197,23 +192,18 @@ public class Estancia {
         //si el MINIMO es ese valor quiere decir que los sensores tiene rango nulo por lo que lo devuelvo vacio
         if(min == Float.MAX_VALUE) return new Sensor[0];
 
-
+        int n = 0;
         //bucle para añadir al array los sensores cuyo valor sea igual al máximo
         for (Sensor i : this.sensores) {
             if (i.getTipo().equals(tipo)) {
                 if (i.minimo() == min) {
-                    arraySensores.add(i);
+                    n++; //aumentamos el tamaño
+                    arraySensores[n] = i; //añadimos en la posicion n el sensor
                 }
             }
 
         }
-        //recorro el arraylist y copio en el vector mi array
-        Sensor[] solucion = new Sensor[arraySensores.size()];
-        for (int i=0;i<arraySensores.size();i++){
-            solucion[i]=arraySensores.get(i);
-            }
-
-        return solucion; //devolvemos el array final
+        return arraySensores; //devolvemos el array final
 
     }
 
@@ -265,15 +255,9 @@ public class Estancia {
         dato += "]";
         return dato;
     }
-    @Override
-    public int hashCode(){
-        int valor=1;
-        final int primo = 67;
-        if(this.nombre.equals("NOT-VALID-NAME"))return 0;
-        return primo*valor + this.nombre.hashCode();
-    }
 
     @Override
+    /*Planta*/
     public boolean equals(Object obj) { //metodo equals para paquete
 
         if(this == obj){

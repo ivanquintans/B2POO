@@ -156,7 +156,7 @@ public class PrincipalB2E1 {
         System.out.println("Sensor 3: " + sensor3.limiteInferior() + " , " + sensor3.limiteSuperior());
         System.out.println("Sensor 4: " + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
 
-        int j=4;
+        int j=5;
         for(Sensor i : estancia1.getSensores()){
 
             if (ids.contains(i.getId())){
@@ -189,52 +189,125 @@ public class PrincipalB2E1 {
 
         //APARTADO l
         //añadimos los valores
+        System.out.println("\nAPARTADO L:");
 
         //sensor 5
 
-        estancia1.nuevoDato("202",5.1f);
-        estancia1.nuevoDato("202",5.2f);
-        estancia1.nuevoDato("202",3.5f);
-        estancia1.nuevoDato("202",25.5f);
-        estancia1.nuevoDato("202",25.5f);
-        estancia1.nuevoDato("202",-29.3f);
-        estancia1.nuevoDato("202",35.1f);
-        estancia1.nuevoDato("202",35.4f);
-        estancia1.nuevoDato("202",-35.1f);
-        estancia1.nuevoDato("202",40.1f);
-        estancia1.nuevoDato("202",49.8f);
-        estancia1.nuevoDato("202",34.5f);
+        System.out.println("\nDATOS SENSOR 5:\n");
+
+        System.out.println( estancia1.nuevoDato("202",5.1f)+ " \n" +
+        estancia1.nuevoDato("202",5.2f) + " \n" +
+        estancia1.nuevoDato("202",3.5f)+ " \n" +
+        estancia1.nuevoDato("202",25.5f)+ " \n" +
+        estancia1.nuevoDato("202",25.5f)+ " \n" +
+        estancia1.nuevoDato("202",-29.3f)+ " \n" +
+        estancia1.nuevoDato("202",35.1f)+ " \n" +
+        estancia1.nuevoDato("202",35.4f)+ " \n" +
+        estancia1.nuevoDato("202",-35.1f)+ " \n" +
+        estancia1.nuevoDato("202",40.1f)+ " \n" +
+        estancia1.nuevoDato("202",49.8f)+ " \n" +
+        estancia1.nuevoDato("202",34.5f));
 
         //sensor 6
 
-        estancia1.nuevoDato("301",31.0f);
-        estancia1.nuevoDato("301",31.2f);
-        estancia1.nuevoDato("301",31.4f);
-        estancia1.nuevoDato("301",32.1f);
-        estancia1.nuevoDato("301",32.4f);
-        estancia1.nuevoDato("301",32.0f);
-        estancia1.nuevoDato("301",32.4f);
-        estancia1.nuevoDato("301",33.4f);
-        estancia1.nuevoDato("301",33.0f);
-        estancia1.nuevoDato("301",32.8f);
-        estancia1.nuevoDato("301",32.9f);
-        estancia1.nuevoDato("301",32.5f);
+        System.out.println("\nDATOS SENSOR 6:\n");
+
+        System.out.println( estancia1.nuevoDato("301",31.0f) + " \n" +
+        estancia1.nuevoDato("301",31.2f)+ " \n" +
+        estancia1.nuevoDato("301",31.4f)+ " \n" +
+        estancia1.nuevoDato("301",32.1f)+ " \n" +
+        estancia1.nuevoDato("301",32.4f)+ " \n" +
+        estancia1.nuevoDato("301",32.0f)+ " \n" +
+        estancia1.nuevoDato("301",32.4f)+ " \n" +
+        estancia1.nuevoDato("301",33.4f)+ " \n" +
+        estancia1.nuevoDato("301",33.0f)+ " \n" +
+        estancia1.nuevoDato("301",32.8f)+ " \n" +
+        estancia1.nuevoDato("301",32.9f)+ " \n" +
+        estancia1.nuevoDato("301",32.5f));
 
 
-        //sensor 6
+        //sensor 7
 
-        estancia1.nuevoDato("302",-45.1f);
-        estancia1.nuevoDato("302",-45.2f);
-        estancia1.nuevoDato("302",-45.2f);
-        estancia1.nuevoDato("302",-45.2f);
-        estancia1.nuevoDato("302",34.9f);
-        estancia1.nuevoDato("302",34.5f);
-        estancia1.nuevoDato("302",34.6f);
-        estancia1.nuevoDato("302",38.9f);
-        estancia1.nuevoDato("302",37.2f);
-        estancia1.nuevoDato("302",-45.1f);
-        estancia1.nuevoDato("302",36.4f);
-        estancia1.nuevoDato("302",35.4f);
+        System.out.println("\nDATOS SENSOR 7:\n");
+
+        System.out.println( estancia1.nuevoDato("302",-45.1f) + " \n" +
+        estancia1.nuevoDato("302",-45.2f)+ " \n" +
+        estancia1.nuevoDato("302",-45.2f)+ " \n" +
+        estancia1.nuevoDato("302",-45.2f)+ " \n" +
+        estancia1.nuevoDato("302",34.9f)+ " \n" +
+        estancia1.nuevoDato("302",34.5f)+ " \n" +
+        estancia1.nuevoDato("302",34.6f)+ " \n" +
+        estancia1.nuevoDato("302",38.9f)+ " \n" +
+        estancia1.nuevoDato("302",37.2f)+ " \n" +
+        estancia1.nuevoDato("302",-45.1f)+ " \n" +
+        estancia1.nuevoDato("302",36.4f)+ " \n" +
+        estancia1.nuevoDato("302",35.4f));
+
+        //APARTADO M
+        //mostramos por pantalla la estancia1
+
+        System.out.println("\nAPARTADO M:\n");
+        System.out.println(estancia1);
+
+        //APARTADO N
+        //mostramos por pantalla las caracteristicas de los sensores temperatura
+
+        System.out.println("\nAPARTADO N:\n");
+         for(Sensor i : estancia1.sensoresTipo("temperatura")){
+             System.out.println(i);
+         }
+
+        //APARTADO O
+        //mostramos por pantalla las caracteristicas de los sensores sonido
+
+        System.out.println("\nAPARTADO O:\n");
+        for(Sensor i : estancia1.sensoresTipo("sonido")){
+            System.out.println(i);
+        }
+
+        //APARTADO P
+        //IMPRIMIMOS EL SENSOR CON VALOR MAXIMO Y MINIMO DE TEMPERATURA
+
+        //SENSOR MAX VALOR
+
+        System.out.println("\nAPARTADO P:\n");
+
+        System.out.println("\nSensor Maximo:\n");
+
+        for(Sensor i : estancia1.sensorMaxValor("humedad")){
+            System.out.println(i);
+        }
+
+        System.out.println("\nSensor Minimo:\n");
+
+        for(Sensor i : estancia1.sensorMinValor("humedad")){
+            System.out.println(i);
+        }
+
+        //APARTADO Q
+        //MOSTRAMOS LOS VALORES PARA EL SENSOR CON ID 301 CUYOS VALORES MAYORES QUE 33
+
+        System.out.println("\nAPARTADO Q:\n");
+
+        System.out.println(estancia1.valoresSuperiores("301",33f));
+
+        //APARTADO R
+        //AÑADIR EL SENSOR 8
+
+        System.out.println("\nAPARTADO R:\n");
+
+        System.out.println(estancia1.darAlta("202","sonido",new float[]{0,118f},67.6f));
+
+        //APARTADO S
+        //mostramos por pantalla la estancia1
+
+        System.out.println("\nAPARTADO S:\n");
+        System.out.println(estancia1);
+
+
+
+
+
 
 
 
