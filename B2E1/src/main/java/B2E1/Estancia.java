@@ -75,6 +75,7 @@ public class Estancia {
         //al utilizar un set no deberiamos comprobar si es igual a los elementos existentes ya que set es una lista no ordenada
         //en la que no puede existir ningun elemento repetido
 
+        if(sensor==null) return false;
         //pero si debemos comprobar si las ids son iguales
 
         for(Sensor i: this.sensores) {
@@ -100,6 +101,10 @@ public class Estancia {
 
     public boolean darAlta(String id, String tipo, float[] rango, float precio) {
 
+        //si no tenemos una id que pueda identificar el sensor
+
+        if(id==null) return false;
+
         Sensor nuevo = new Sensor(id, tipo, rango, precio);
 
         //pero si debemos comprobar si las ids son iguales
@@ -114,6 +119,8 @@ public class Estancia {
     }
 
     public boolean nuevoDato(String id, float dato) {
+
+        //se comprueba la id automaticamente dentro
 
         for (Sensor i : sensores) {
             if (i.getId().equals(id)) {
@@ -131,6 +138,8 @@ public class Estancia {
 
     public Set<Sensor> sensoresTipo(String tipo) {
 
+        //si el tipo no es valido devuelvo vacio el set
+
         Set<Sensor> devuleto = new HashSet<Sensor>();
 
         for (Sensor i : this.sensores) {
@@ -146,6 +155,8 @@ public class Estancia {
     /*Doble bucle*/
 
     public Sensor[] sensorMaxValor(String tipo) {
+
+        //si el tipo no es valido devuelvo vacio el sensor[]
 
         ArrayList<Sensor> arraySensores = new ArrayList<>();
         float max = Float.MIN_VALUE; //asignamos un valor para comprobar el error
@@ -183,6 +194,8 @@ public class Estancia {
     //mismo codigo que el de maximos pero para minimos
     public Sensor[] sensorMinValor(String tipo) {
 
+        //si el tipo no es valido devuelvo vacio el sensor[]
+
         ArrayList<Sensor> arraySensores = new ArrayList<>(); //tamaño 10 ya que no tenemos tantos sensores en la estancia
         float min = Float.MAX_VALUE; //asignamos un valor para comprobar el error
 
@@ -218,6 +231,8 @@ public class Estancia {
     }
 
     public ArrayList<Float> valoresSuperiores(String id, float valor) {
+
+        //si la id no es valida nos devuleve vacio
 
         ArrayList<Float> valores = new ArrayList<>();//declaramos un array list para poder devolver los valores
 

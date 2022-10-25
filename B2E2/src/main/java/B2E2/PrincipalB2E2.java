@@ -157,8 +157,7 @@ public class PrincipalB2E2 {
         System.out.println("Sensor 4: " + sensor4.limiteInferior() + " , " + sensor4.limiteSuperior());
 
         int j=5;
-        for(Sensor i : estancia1.getSensores()){
-
+        for(Sensor i : estancia1.getSensores().values()){
             if (ids.contains(i.getId())){
                 System.out.println("Sensor "+j+": " + i.limiteInferior() + " , " + i.limiteSuperior());
                 j++;
@@ -170,7 +169,7 @@ public class PrincipalB2E2 {
         //mostramos por pantalla los sensores 5,6,7
 
         System.out.println("\nAPARTADO J:\n");
-        for(Sensor i : estancia1.getSensores()){
+        for(Sensor i : estancia1.getSensores().values()){
 
             if (ids.contains(i.getId())){
                 System.out.println("\n"+i);
@@ -303,6 +302,25 @@ public class PrincipalB2E2 {
 
         System.out.println("\nAPARTADO S:\n");
         System.out.println(estancia1);
+
+        //APARTADO T
+        //mostramos por pantalla los valores de los sensores ruido
+
+        System.out.println("\nAPARTADO T:\n");
+        System.out.println(estancia1.valoresSensoresTipo("ruido").values());
+
+        //añado sonido por si acaso no eran los de tipo ruido
+        System.out.println(estancia1.valoresSensoresTipo("sonido").values());
+
+        //APARTADO V
+        //mostramos por pantalla los identificadores de los sensores con valor mayor a 40
+
+        System.out.println("\nAPARTADO V:\n");
+
+        for(Sensor i : estancia1.sensoresCosteMayor(40)){
+            System.out.print(i.getId() + ", ");
+        }
+
 
 
 
