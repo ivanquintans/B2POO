@@ -1,5 +1,5 @@
 
-package B2E2;
+package B2E3;
 
 import java.util.ArrayList;
 
@@ -150,9 +150,8 @@ public class Sensor {
             return Float.MIN_VALUE; //SI NO HAY LIST DEVOLVEMOS ERROR QUE PODAMOS IDENTIFICAR COMO ERROR
         }
         float media=0;
-        for(Float i: this.datos){
-            media+=i;
-
+        for (int i=0;i<this.datos.size();i++){
+            media+= this.datos.get(i);
         }
 
         media= media/this.datos.size();
@@ -165,11 +164,15 @@ public class Sensor {
 
         float max=Float.MIN_VALUE; //asignamos un valor para comprobar el error
 
-        for(Float i: this.datos){
-            if(i>=max){
-                max=i;
+        for (int i=0;i<this.datos.size();i++){
+
+            if(this.datos.get(i)>=max){
+
+                max = this.datos.get(i);
+
             }
         }
+
         return max; //devolvemos el valor
 
     }
@@ -178,9 +181,12 @@ public class Sensor {
 
         float min=Float.MAX_VALUE; //asignamos un valor para comprobar el error
 
-        for(Float i: this.datos){
-            if(i<=min){
-                min=i;
+        for (int i=0;i<this.datos.size();i++){
+
+            if(this.datos.get(i)<=min){
+
+                min = this.datos.get(i);
+
             }
         }
 

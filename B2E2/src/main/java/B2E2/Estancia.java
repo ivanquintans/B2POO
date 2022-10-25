@@ -1,6 +1,7 @@
 package B2E2;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +11,7 @@ public class Estancia {
 
     private int planta;
 
-    private Set<Sensor> sensores;
+    private HashMap<String,Sensor> sensores;
 
     private float coste;
 
@@ -21,7 +22,7 @@ public class Estancia {
     public Estancia(String nombre, int planta) {
 
         //debemos también declarar nuestro set mediante un hash set
-        this.sensores = new HashSet<Sensor>();
+        this.sensores = new HashMap<>();
         this.coste= 0f;
 
         if (nombre != null) {
@@ -58,7 +59,7 @@ public class Estancia {
         return planta;
     }
 
-    public Set<Sensor> getSensores() {
+    public HashMap<String, Sensor> getSensores() {
         return sensores;
     }
 
@@ -69,7 +70,7 @@ public class Estancia {
     /*Metodos funcionales*/
 
 
-    /* CRITERIO DE IGUALDAD*/
+    /* NO SE QUE KEY METERLE*/
     public boolean darAlta(Sensor sensor) {
 
         //al utilizar un set no deberiamos comprobar si es igual a los elementos existentes ya que set es una lista no ordenada
@@ -77,14 +78,15 @@ public class Estancia {
 
         //pero si debemos comprobar si las ids son iguales
 
-        for(Sensor i: this.sensores) {
-            if(i.getId().equals(sensor.getId()))  //si los ids son iguales
+        for(String key: sensores.keySet()) {
+            if(sensores.get(key).getId().equals(sensor.getId())) {
+                //if(i.getId().equals(sensor.getId()))  //si los ids son iguales
                 return false;//no lo añadimos y devolvemos false
-
+            }
         }
 
         //en otro caso lo añadimos y devolvemos false
-        this.sensores.add(sensor); //añadimos el sensor a sensores
+        this.sensores.put(sensor.getId(),sensor); //añadimos el sensor a sensores
 
         //calculamos el coste como la suma del precio de los sensores
 
@@ -96,7 +98,7 @@ public class Estancia {
     }
 
     /* CRITERIO DE IGUALDAD*/
-    /*HASH SET Y COMPROBAR*/
+
 
     public boolean darAlta(String id, String tipo, float[] rango, float precio) {
 
@@ -104,10 +106,13 @@ public class Estancia {
 
         //pero si debemos comprobar si las ids son iguales
 
+        /*
         for(Sensor i: this.sensores) {
             if(i.getId().equals(nuevo.getId()))  //si los ids son iguales
                 return false;//no lo añadimos y devolvemos false
         }
+        */
+        for(String key : sensores.keySet())
         //en otro caso lo añadimos y devolvemos false
         this.sensores.add(nuevo); //añadimos el sensor a sensores
         return true;
