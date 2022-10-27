@@ -312,10 +312,10 @@ public class PrincipalB2E2 {
         //añado sonido por si acaso no eran los de tipo ruido
         System.out.println(estancia1.valoresSensoresTipo("sonido").values());
 
-        //APARTADO V
+        //APARTADO U
         //mostramos por pantalla los identificadores de los sensores con valor mayor a 40
 
-        System.out.println("\nAPARTADO V:\n");
+        System.out.println("\nAPARTADO U:\n");
 
         for(Sensor i : estancia1.sensoresCosteMayor(40)){
             System.out.print(i.getId() + ", ");
