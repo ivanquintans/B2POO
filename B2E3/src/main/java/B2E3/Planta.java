@@ -309,13 +309,41 @@ public class Planta {
         }
         return devuleto;
     }
+    public String imprimirEstancias() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
+        String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
+        boolean flag=false;
+        for (Estancia estancia :this.estancias.values()) {
+            if(flag){
+                dato+= ",";
+            }
+            dato += "\"" + estancia.getNombre() + "\"";
+            flag=true;
+        }
+        dato += "]";
+        return dato;
+
+    }
+    public String imprimirSensoresConProblemas() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
+        String dato = "["; //asignamos a nuestro string en primer lugar el corchete
+
+        boolean flag=false;
+        for (Sensor sensor :this.sensoresConProblemas.values()) {
+            if(flag){
+                dato+= ",";
+            }
+            dato += "\"" + sensor.getId() + "\"";
+            flag=true;
+        }
+        dato += "]";
+        return dato;
+    }
     @Override
     public int hashCode(){
         int valor=1;
         final int primo = 67;
-        if(this.nombre.equals("NOT-VALID-NAME"))return 0;
-        return primo*valor + this.nombre.hashCode();
+        if(this.numero==Integer.MIN_VALUE)return 0;
+        return primo*valor + this.hashCode(); //mas el hashcode de la planta en este caso
     }
 
     @Override
@@ -330,13 +358,26 @@ public class Planta {
         if(this.getClass() != obj.getClass()){
             return false;
         }
-        final Estancia nuevo = (Estancia) obj;
-        if (!this.nombre.equals(nuevo.nombre)){
-            if(!(this.planta == nuevo.planta)) {
+        final Planta nuevo = (Planta) obj;
+        if (this.numero!=nuevo.numero){ //si ss numeros son distintos
+            if(!(this.edificio == nuevo.edificio)) { //si estan en distinto edificio
                 return false;
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString(){
+        return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
+                + (this.numero!=Integer.MIN_VALUE ? " \"numero\" : \"" +  this.numero + "\",\n" : "")
+                + (this.tipo.equals("NOT-VALID-TYPE")? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
+                + (this.edificio!=null ? " \"edificio\" : \"" +  this.edificio + "\",\n" : "")
+                + (!this.estancias.isEmpty() ? " \"estancias\" : " + this.imprimirEstancias() + ",\n" : "")
+                + (this.presupuesto!=Float.MIN_VALUE ? " \"estancias\" : " +  this.presupuesto + ",\n" : "")
+                + (!this.sensoresConProblemas.isEmpty() ? " \"sensores_media\" : " + this.sensoresConProblemas  + ",\n" : "")
+
+                + "}";
     }
 
 }
