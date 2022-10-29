@@ -2,9 +2,7 @@ package B2E3;
 
 import sun.security.action.PutAllAction;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 public class Edificio {
 
@@ -102,24 +100,71 @@ public class Edificio {
 
     /*Metodos funcionales*/
 
-    public boolean darAltaPlanta(Planta planta){
+    public boolean darAltaPlanta(Planta planta) {
 
-        if(planta.getNumero()>-2 && planta.getNumero()<6){ //si el numero de la planta se encuentra en el rango de plantas del edificio
-            if(!this.plantas.containsKey(planta.getNumero())){ //si ya hay una planta en el edificio con el numero
-                this.plantas.put(planta.getNumero(),planta);
+        if (planta.getNumero() > -2 && planta.getNumero() < 6) { //si el numero de la planta se encuentra en el rango de plantas del edificio
+            if (!this.plantas.containsKey(planta.getNumero())) { //si ya hay una planta en el edificio con el numero
+                this.plantas.put(planta.getNumero(), planta);
+                return true;
             }
         }
+        return false;
         //añadimos la planta al hash map
+    }
 
+    //corregir ejercicio
+    /*Probar esto*/
     public int[] plantasNoAlta(){
 
+        //declaramos un arraylist con todas las plantas posibles
+        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(-2,-1,0,1,2,3,4,5,6));
+
+        for(Integer num : numeros){ //por cada numero del array
+            for (Integer numero : this.plantas.keySet()) { //si esta esa planta dada de alta la eliminamos
+                if(numero.equals(num)){ //probar
+                    numeros.remove(num); //eliminamos el numero si se encuentra en alguna de las plantas
+
+                }
+            }
+        }
+        //recorro el arraylist y copio en el vector mi array
+        int[] solucion = new int[numeros.size()];
+        for (int i=0;i<numeros.size();i++){
+            solucion[i]=numeros.get(i);
+        }
+        return solucion;
     }
 
     public Set<Planta> plantasMasCaras(){
 
+        Set<Planta> arrayPlantas = new HashSet<>();
+        float max = Float.MIN_VALUE; //asignamos un valor para comprobar el error
 
+        //for para comprobar el maximo
+
+        for (Integer num : this.plantas.keySet()) {
+            if (this.plantas.get(num).getPresupuesto() >= max) {
+                max = this.plantas.get(num).getPresupuesto(); //el valor maximo pasa a ser ese presupuesto
+            }
+
+        }
+        //si el MINIMO es ese valor quiere decir que el presupuesto tiene un rango no valido por lo que devolvemos vacio
+        if(max == Float.MAX_VALUE) return arrayPlantas;
+
+
+        //bucle para añadir al array los sensores cuyo valor sea igual al máximo
+
+        for (Integer num : this.plantas.keySet()) {
+            if (this.plantas.get(num).getPresupuesto() == max) {
+                if(!arrayPlantas.contains(this.plantas.get(num))) { //comprobamos si esta dentro el elemento
+                    arrayPlantas.add(this.plantas.get(num)); //añadimos la planta al array
+                }
+            }
+        }
+        return arrayPlantas; //devolvemos el array final
     }
 
+    /*revisarr esta funcion y empezar con el main*/
     public HashMap<String,Estancia> plantasMasProblemas(){
 
     }
