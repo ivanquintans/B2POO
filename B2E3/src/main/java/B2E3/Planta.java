@@ -31,12 +31,16 @@ public class Planta {
         setEdificio(edificio);
 
         this.presupuesto=Float.MIN_VALUE; //controlar valor
+        int suma=0;//auxuliar que nos permite actualizar el presupuesto
 
         for(Estancia estancia: estancias.values()){
-            this.presupuesto+=estancia.getCoste();
+            suma+=estancia.getCoste();
             //si no hay coste en los productos el precio es cero
 
         }
+        //apliacamos el 10% a mayores
+
+        this.presupuesto= suma+(suma*0.10f);
 
         this.sensoresConProblemas= new HashMap<>();
 
@@ -53,11 +57,17 @@ public class Planta {
 
         this.sensoresConProblemas= new HashMap<>();
 
+        this.presupuesto=Float.MIN_VALUE; //controlar valor
+        int suma=0;//auxuliar que nos permite actualizar el presupuesto
+
         for(Estancia estancia: estancias.values()){
-            this.presupuesto+=estancia.getCoste();
+            suma+=estancia.getCoste();
             //si no hay coste en los productos el precio es cero
 
         }
+        //apliacamos el 10% a mayores
+
+        this.presupuesto= suma+(suma*0.10f);
 
         this.estancias= new HashMap<>();
 
@@ -158,12 +168,14 @@ public class Planta {
                 }
                 //debemos actualizar el presupuesto
                 this.presupuesto=0; //reiniciamos el presupuesto
+                int suma=0;
                 //volvemos a recorrer el bucle para actualizar el presupuesto
 
                 for(Estancia estancia: estancias.values()){
-                    this.presupuesto+=estancia.getCoste();
+                    suma +=estancia.getCoste();
                     //si no hay coste en los productos el precio es cero
                 }
+                this.presupuesto= suma + (suma*0.10f); //aplicamos el 10%
             }
         }
     }
@@ -185,12 +197,14 @@ public class Planta {
                 }
                 //debemos actualizar el presupuesto
                 this.presupuesto=0; //reiniciamos el presupuesto
+                int suma=0;
                 //volvemos a recorrer el bucle para actualizar el presupuesto
 
                 for(Estancia estancia: estancias.values()){
-                    this.presupuesto+=estancia.getCoste();
+                    suma +=estancia.getCoste();
                     //si no hay coste en los productos el precio es cero
                 }
+                this.presupuesto= suma + (suma*0.10f); //aplicamos el 10%
             }
         }
     }
@@ -213,13 +227,15 @@ public class Planta {
                     }
                 }
                 //debemos actualizar el presupuesto
-                this.presupuesto = 0; //reiniciamos el presupuesto
+                this.presupuesto=0; //reiniciamos el presupuesto
+                int suma=0;
                 //volvemos a recorrer el bucle para actualizar el presupuesto
 
-                for (Estancia estancia : estancias.values()) {
-                    this.presupuesto += estancia.getCoste();
+                for(Estancia estancia: estancias.values()){
+                    suma +=estancia.getCoste();
                     //si no hay coste en los productos el precio es cero
                 }
+                this.presupuesto= suma + (suma*0.10f); //aplicamos el 10%
             }
         }
     }
@@ -263,50 +279,10 @@ public class Planta {
         while (iteradorSensores.hasNext()){
             sensoresKey=iteradorSensores.next();
             //debemos obtener el tipo de los sensores que substituyeron a los sensores viejos
-            switch (this.sensoresConProblemas.get(sensoresKey).getTipo()){
-                //vamos a contar las veces que se repite cada sensor para saber cual es el que mas se repite
-
-                case("temperatura"):
-
-                    temperatura++;
-                    break;
-
-                case("sonido"):
-
-                    sonido++;
-                    break;
-
-                case("humedad"):
-
-                    humedad++;
-                    break;
-
-                case("luz"):
-
-                    luz++;
-                    break;
-            }
-
-            /*Corregir esto*/
-            /*MALA INTERPRETACION DEL RESULTADO*/
-
-            String[] auxiliar = {"temperatura","humedad","sonido","luz"}; //declaro el array de tipos
-            Integer[] contadores = {temperatura,humedad,sonido,luz}; //declaro el array de contadores en el mismo orden
-            int max=1;
-
-            for (Integer contador : contadores) {
-                if (contador >= max) {
-                    max = contador;
-                }
-            }
-            //recorremos para saber si hay mas de un max
-            for(int i=0;i<contadores.length;i++) {
-                if (contadores[i] == max) {
-                    //añadimos a nuesto Set
-                    devuleto.add(auxiliar[i]);
-                }
-            }
+            //devolcemos un set con los tipos de sensores que han sido cambiados
+            devuleto.add(this.sensoresConProblemas.get(sensoresKey).getTipo());
         }
+
         return devuleto;
     }
     public String imprimirEstancias() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
@@ -374,8 +350,8 @@ public class Planta {
                 + (this.tipo.equals("NOT-VALID-TYPE")? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
                 + (this.edificio!=null ? " \"edificio\" : \"" +  this.edificio + "\",\n" : "")
                 + (!this.estancias.isEmpty() ? " \"estancias\" : " + this.imprimirEstancias() + ",\n" : "")
-                + (this.presupuesto!=Float.MIN_VALUE ? " \"estancias\" : " +  this.presupuesto + ",\n" : "")
-                + (!this.sensoresConProblemas.isEmpty() ? " \"sensores_media\" : " + this.sensoresConProblemas  + ",\n" : "")
+                + (this.presupuesto!=Float.MIN_VALUE ? " \"presupuesto\" : " +  this.presupuesto + ",\n" : "")
+                + (!this.sensoresConProblemas.isEmpty() ? " \"sensoresConProblemas\" : " + this.imprimirSensoresConProblemas()  + ",\n" : "")
 
                 + "}";
     }
