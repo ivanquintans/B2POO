@@ -45,7 +45,6 @@ public class Planta {
         this.sensoresConProblemas= new HashMap<>();
 
 
-
     }
     public Planta(int numero,String tipo){
 
@@ -60,17 +59,9 @@ public class Planta {
         this.presupuesto=Float.MIN_VALUE; //controlar valor
         int suma=0;//auxuliar que nos permite actualizar el presupuesto
 
-        for(Estancia estancia: estancias.values()){
-            suma+=estancia.getCoste();
-            //si no hay coste en los productos el precio es cero
-
-        }
-        //apliacamos el 10% a mayores
-
-        this.presupuesto= suma+(suma*0.10f);
-
         this.estancias= new HashMap<>();
 
+        //el presupuesto va a ser siempre cero ya que no le estamos pasando ninguna estancia
     }
 
     /*Setters*/
@@ -137,19 +128,20 @@ public class Planta {
             this.estancias.put(estancia.getNombre(),estancia);
             return true;
         }
+
         return false;
     }
 
-    public boolean darAltaEstancia(ArrayList<Estancia> estancias){
+    public boolean darAltaEstancia(ArrayList<Estancia> estancias) {
 
         //recorremos el arraylist
-        for(Estancia estancia :  estancias){
+        for (Estancia estancia : estancias) {
             //si coinciden las plantas
-            if(estancia.getPlanta().getNumero()==this.getNumero()){
+            if (estancia.getPlanta().getNumero() == this.getNumero()) {
                 //añadimos al hash map las estancias con su nombre como clave
-                this.estancias.put(estancia.getNombre(),estancia);
-                return true;
+                this.estancias.put(estancia.getNombre(), estancia);
             }
+            if (this.estancias.size() == estancias.size()) return true;
         }
         return false;
     }

@@ -165,9 +165,27 @@ public class Edificio {
     }
 
     /*revisarr esta funcion y empezar con el main*/
-    public HashMap<String,Estancia> plantasMasProblemas(){
+    /*revisar con chris porq xd*/
+    /*public HashMap<String,Estancia> plantasMasProblemas(){
+
+        int max=0;
+
+        for (Planta planta: this.plantas.values()){
+
+            if(planta.getSensoresConProblemas().size()>max){
+                for(Sensor sensor:planta.getSensoresConProblemas().values()){
+                    sensor.getEstancia()
+                }
+
+            }
+
+
+
+        }
 
     }
+    */
+
 
     public String imprimirPlantas() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete

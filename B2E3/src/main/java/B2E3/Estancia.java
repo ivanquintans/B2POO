@@ -369,7 +369,7 @@ public class Estancia {
     public String toString(){
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
-                + (this.planta!=null? " \"planta\" : \"" +  this.planta + "\",\n" : "")
+                + (this.planta!=null? " \"planta\" : \"" +  this.planta.getNumero() + "\",\n" : "")
                 + (!this.sensores.isEmpty() ? " \"sensores\" : \"" +  imprimirSensores() + "\",\n" : "")
                 + (this.coste>=0 ? " \"coste\" : " +  this.coste + ",\n" : "")
                 + (!this.sensores.isEmpty() ? " \"sensores_media\" : " +  imprimirSensoresMedia() + ",\n" : "")

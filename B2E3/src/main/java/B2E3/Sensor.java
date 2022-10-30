@@ -118,6 +118,10 @@ public class Sensor {
         return tipo;
     }
 
+    public Estancia getEstancia(){
+        return this.estancia;
+    }
+
     /* metodos funcionales */
 
     public float limiteInferior(){
