@@ -87,6 +87,9 @@ public class Estancia {
 
         this.coste += sensor.getPrecio();
 
+        //debemos actualizar la estancia en el sensor
+        sensor.setEstancia(this);
+
 
         return true;
 
@@ -108,6 +111,11 @@ public class Estancia {
         }
 
         this.sensores.put(nuevo.getId(),nuevo); //añadimos el sensor a sensores
+        //debemos actualizar la estancia en el sensor
+        nuevo.setEstancia(this);
+        //calculamos el coste como la suma del precio de los sensores
+
+        this.coste += nuevo.getPrecio();
         return true;
     }
 
@@ -118,13 +126,12 @@ public class Estancia {
         for(String key : this.sensores.keySet()){
             if(key.equals(id)){
                 this.sensores.get(key).nuevoDato(dato);
+                if(this.sensores.get(key).getDatos().contains(dato)){
+                    return true;
+                }
             }
         }
 
-        //despues de añadir el valor si la id esta contenida
-        if(sensores.containsKey(id)){
-            return true;
-        }
         //si no hay ningun sensor con el mismo id que queremos
         return false;
     }
@@ -297,14 +304,17 @@ public class Estancia {
     public boolean darBaja(String id){
 
         if(this.sensores.containsKey(id)){
+            //si damos de baja actualizamos el precio
+            this.coste-=this.sensores.get(id).getPrecio();
             this.sensores.remove(id);
             return true;
         }
 
+
         return false;
     }
 
-    /*Controlar la coma*/
+
     public String imprimirSensores() { //la pongo como publica ya que de esta forma en la calse principal puedo imprimir los valores de los sensores. asi hay mas modularidad en el código
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
@@ -371,7 +381,8 @@ public class Estancia {
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
                 + (this.planta!=null? " \"planta\" : \"" +  this.planta.getNumero() + "\",\n" : "")
                 + (!this.sensores.isEmpty() ? " \"sensores\" : \"" +  imprimirSensores() + "\",\n" : "")
-                + (this.coste>=0 ? " \"coste\" : " +  this.coste + ",\n" : "")
+                + (this.coste>0 ? " \"coste\" : " +  this.coste + ",\n" : "")
+                //valor de control para saber que la media no es valida es el minimo para float
                 + (!this.sensores.isEmpty() ? " \"sensores_media\" : " +  imprimirSensoresMedia() + ",\n" : "")
 
                 + "}";

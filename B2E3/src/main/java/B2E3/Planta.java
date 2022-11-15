@@ -13,6 +13,9 @@ public class Planta {
     private float presupuesto;
     private HashMap<String,Sensor> sensoresConProblemas;
 
+    //lo comento por el grupo de clase un compañero que el profesor le recomendo realizar este atributo para tener los sensores que fueron eliminados
+    private HashMap<String,Sensor> sensoresDadosDeBaja;
+
 
     /*Constructores*/
 
@@ -25,12 +28,14 @@ public class Planta {
 
         setTipo(tipo); //tenemos el set creado
 
+        this.presupuesto=Float.MIN_VALUE; //controlar valor
+
         /*NO DEBE DE SER VACIO EL HASH SET*/
         setEstancias(estancias);
 
         setEdificio(edificio);
 
-        this.presupuesto=Float.MIN_VALUE; //controlar valor
+
         int suma=0;//auxuliar que nos permite actualizar el presupuesto
 
         for(Estancia estancia: estancias.values()){
@@ -44,6 +49,8 @@ public class Planta {
 
         this.sensoresConProblemas= new HashMap<>();
 
+        this.sensoresDadosDeBaja= new HashMap<>();
+
 
     }
     public Planta(int numero,String tipo){
@@ -54,7 +61,11 @@ public class Planta {
 
         setTipo(tipo); //tenemos el set creado
 
+        this.edificio=null;
+
         this.sensoresConProblemas= new HashMap<>();
+
+        this.sensoresDadosDeBaja= new HashMap<>();
 
         this.presupuesto=Float.MIN_VALUE; //controlar valor
         int suma=0;//auxuliar que nos permite actualizar el presupuesto
@@ -76,9 +87,11 @@ public class Planta {
         }
     }
     public void setEstancias(HashMap<String, Estancia> estancias) {
-
-        this.estancias=new HashMap<>(estancias); //declaramos un hashmap vacio
-
+        if(estancias!=null){
+            this.estancias=new HashMap<>(estancias);
+        }else {
+            this.estancias = new HashMap<>(); //declaramos un hashmap vacio
+        }
     }
 
     public void setTipo(String tipo) {
@@ -119,20 +132,28 @@ public class Planta {
     public HashMap<String, Sensor> getSensoresConProblemas() {
         return sensoresConProblemas;
     }
-
-    /*METODOS FUNCIONALES*/
-
-    public boolean darAltaEstancia(Estancia estancia) {
-
-        if (estancia.getPlanta().getNumero() == this.getNumero()) {
-            this.estancias.put(estancia.getNombre(),estancia);
-            return true;
-        }
-
-        return false;
+    //hacemos el getter para este atributo nuevo
+    public HashMap<String, Sensor> getSensoresDadosDeBaja() {
+        return sensoresDadosDeBaja;
     }
 
+    /*METODOS FUNCIONALES*/
+    //en estas dos funciones controlamos
+    public boolean darAltaEstancia(Estancia estancia) {
+
+        if (estancia != null) {
+            if (estancia.getPlanta().getNumero() == this.getNumero()) {
+                this.estancias.put(estancia.getNombre(), estancia);
+                this.presupuesto+=estancia.getCoste()*1.1;
+                return true;
+            }
+
+        }
+        return false;
+    }
     public boolean darAltaEstancia(ArrayList<Estancia> estancias) {
+
+        boolean control=true;
 
         //recorremos el arraylist
         for (Estancia estancia : estancias) {
@@ -140,12 +161,15 @@ public class Planta {
             if (estancia.getPlanta().getNumero() == this.getNumero()) {
                 //añadimos al hash map las estancias con su nombre como clave
                 this.estancias.put(estancia.getNombre(), estancia);
+                //cada vez que metamos una estancia actualizamos el presupuesto
+                this.presupuesto+=estancia.getCoste()*1.1;
+            //si alguna no se mete
+            }else{
+                control=false;
             }
-            if (this.estancias.size() == estancias.size()) return true;
         }
-        return false;
+        return control;
     }
-    /*Presupuesto de la planta*/
     public void darAltaSensor(String id,Sensor sensor){
 
         if(sensor!=null){
@@ -206,16 +230,18 @@ public class Planta {
         if(sensor!=null) {
             if (!id.equals("ID-NO-VALIDA")) {
                 for (Estancia estancia : this.estancias.values()) {
-                    //recorremos los sensores buscando la id del sensor
-                    for (Sensor i : estancia.getSensores().values()) {
-                        if (i.getId().equals(id)) {
-                            //eliminamos el sensor cuya id sea la que queramos
-                            estancia.getSensores().remove(id);
-                            //añadimos el sensor que lo substutuye a los sensores con problemas
-                            this.sensoresConProblemas.put(id, sensor);
-                            //añadimos el nuevo sensor con la id del sensor eliminado
-                            estancia.getSensores().put(id, sensor);
-                        }
+                    //añadimos al nuevo atributo el elemento que damos de baja
+                    this.sensoresDadosDeBaja.put(id,estancia.getSensores().get(id));
+                    //si no es dado de baja correctamente debemos eliminarlo
+                    if(estancia.darBaja(id)){ //devuelve verdadero si se dio de baja el sensor
+                        //añadimos el nuevo sensor al array
+                        estancia.darAlta(sensor);
+                        this.sensoresConProblemas.put(id,sensor);
+                        //si ya me encontro el sensor que queria salgo de esa interaccion
+                        break;
+                    }else{
+                        //si no se dio de baja correctamente lo eliminamos
+                        this.sensoresDadosDeBaja.remove(id);
                     }
                 }
                 //debemos actualizar el presupuesto
@@ -256,8 +282,8 @@ public class Planta {
         }
         return devuleto;
     }
-    /*Debemos obtener el tipo mas defectuoso*/
-    /*Corregir*/
+
+    //devuelve un Set con los sensores defectuosos de sensores con problemas
     public Set<String> tipoSensoresMasDefectuosos(){
 
         //si el tipo no es valido devuelvo vacio el set
@@ -265,14 +291,15 @@ public class Planta {
 
         Set<String> devuleto = new HashSet<String>();
 
-        Iterator<String> iteradorSensores = this.sensoresConProblemas.keySet().iterator();
+        //Recorremos nuestros sensores estropeados
+        Iterator<String> iteradorSensores = this.sensoresDadosDeBaja.keySet().iterator();
         String sensoresKey;
 
         while (iteradorSensores.hasNext()){
             sensoresKey=iteradorSensores.next();
             //debemos obtener el tipo de los sensores que substituyeron a los sensores viejos
             //devolcemos un set con los tipos de sensores que han sido cambiados
-            devuleto.add(this.sensoresConProblemas.get(sensoresKey).getTipo());
+            devuleto.add(this.sensoresDadosDeBaja.get(sensoresKey).getTipo());
         }
 
         return devuleto;
@@ -296,11 +323,12 @@ public class Planta {
         String dato = "["; //asignamos a nuestro string en primer lugar el corchete
 
         boolean flag=false;
-        for (Sensor sensor :this.sensoresConProblemas.values()) {
+        for (String key :this.sensoresConProblemas.keySet()) {
             if(flag){
                 dato+= ",";
             }
-            dato += "\"" + sensor.getId() + "\"";
+            //imprimimos la llave
+            dato += "\"" + key + "\"";
             flag=true;
         }
         dato += "]";
@@ -311,7 +339,10 @@ public class Planta {
         int valor=1;
         final int primo = 67;
         if(this.numero==Integer.MIN_VALUE)return 0;
-        return primo*valor + this.hashCode(); //mas el hashcode de la planta en este caso
+        //pueden ser de un mismo tipo pero el numero tiene que ser diferente por lo que nos sirve este hash code
+
+        //tambien valdria utilizar this.edificio.hashCode();
+        return primo*valor + this.numero + this.tipo.hashCode(); //mas el hashcode de la planta en este caso
     }
 
     @Override
@@ -339,8 +370,8 @@ public class Planta {
     public String toString(){
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.numero!=Integer.MIN_VALUE ? " \"numero\" : \"" +  this.numero + "\",\n" : "")
-                + (this.tipo.equals("NOT-VALID-TYPE")? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
-                + (this.edificio!=null ? " \"edificio\" : \"" +  this.edificio + "\",\n" : "")
+                + (!this.tipo.equals("NOT-VALID-TYPE")? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
+                + (this.edificio!=null ? " \"edificio\" : \"" +  this.edificio.getId() + "\",\n" : "")
                 + (!this.estancias.isEmpty() ? " \"estancias\" : " + this.imprimirEstancias() + ",\n" : "")
                 + (this.presupuesto!=Float.MIN_VALUE ? " \"presupuesto\" : " +  this.presupuesto + ",\n" : "")
                 + (!this.sensoresConProblemas.isEmpty() ? " \"sensoresConProblemas\" : " + this.imprimirSensoresConProblemas()  + ",\n" : "")

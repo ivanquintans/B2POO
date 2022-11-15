@@ -90,6 +90,7 @@ public class Estancia {
         //calculamos el coste como la suma del precio de los sensores
 
         this.coste += sensor.getPrecio();
+        sensor.setEstancia(this);
 
 
         return true;
@@ -115,6 +116,8 @@ public class Estancia {
         }
         //en otro caso lo añadimos y devolvemos false
         this.sensores.add(nuevo); //añadimos el sensor a sensores
+        nuevo.setEstancia(this);
+        this.coste += nuevo.getPrecio();
         return true;
     }
 

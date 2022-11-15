@@ -87,7 +87,7 @@ public class Estancia {
         this.sensores.put(sensor.getId(),sensor); //añadimos el sensor a sensores
 
         //calculamos el coste como la suma del precio de los sensores
-
+        sensor.setEstancia(this);
         this.coste += sensor.getPrecio();
 
 
@@ -111,6 +111,8 @@ public class Estancia {
         }
 
         this.sensores.put(nuevo.getId(),nuevo); //añadimos el sensor a sensores
+        nuevo.setEstancia(this);
+        this.coste += nuevo.getPrecio();
         return true;
     }
 
@@ -121,13 +123,12 @@ public class Estancia {
         for(String key : this.sensores.keySet()){
             if(key.equals(id)){
                 this.sensores.get(key).nuevoDato(dato);
+                if(this.sensores.get(key).getDatos().contains(dato)){
+                    return true;
+                }
             }
         }
 
-        //despues de añadir el valor si la id esta contenida
-        if(sensores.containsKey(id)){
-            return true;
-        }
         //si no hay ningun sensor con el mismo id que queremos
         return false;
     }
@@ -136,7 +137,7 @@ public class Estancia {
 
         //si el tipo no es valido devuelvo vacio el set
 
-        Set<Sensor> devuleto = new HashSet<Sensor>();
+        Set<Sensor> devuleto = new HashSet<>();
 
         Iterator<String> iterador = this.sensores.keySet().iterator();
         String llave;
@@ -248,6 +249,7 @@ public class Estancia {
         for (Sensor value : sensores.values()) { //recorremos los sensores
             if (value.getId().equals(id)) { //si el id del sensor es el mismo
                 for (int j = 0; j < value.getDatos().size(); j++) { //recorremos los datos del sensor
+                    //EL VALOR TIENE QUE SER OBLIGATORIAMENTE MAYOR QUE EL DATO
                     if (value.getDatos().get(j) > valor) {
                         valores.add(value.getDatos().get(j)); //añadimos al array list el valor
                     }

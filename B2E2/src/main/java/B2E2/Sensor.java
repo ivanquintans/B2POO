@@ -255,7 +255,7 @@ public class Sensor {
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (!this.id.equals("ID-NO-VALIDA") ? " \"id\" : \"" +  this.id + "\",\n" : "")
                 + (!this.tipo.equals("NOT-VALID-TYPE") ? " \"tipo\" : \"" +  this.tipo + "\",\n" : "")
-                + (this.estancia!=null ? " \"destino\" : \"" +  this.estancia + "\",\n" : "")
+                + (this.estancia!=null ? " \"estancia\" : \"" +  this.estancia + "\",\n" : "")
                 + (this.rango!=null ? " \"rango\"  " +  this.imprimirRango() + ",\n" : "")
                 + (this.datos!=null ? " \"valores\" : " +  this.imprimirDatos() + ",\n" : "")
                 + (this.precio>0 ? " \"precio\"  " +  this.precio + ",\n" : "")
