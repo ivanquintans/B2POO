@@ -125,6 +125,7 @@ public class Pelicula {
             if (rol.equals("principal") || rol.equals("secundario")) {
                 //recorremos el array list
 
+                //si es null no añadimos nada.
                 for (Actor actor : actores) {
                     for (String tipo : this.actores.keySet()) {
                         //añadimos en el tipo que queremos los actores al hashmap
@@ -144,6 +145,11 @@ public class Pelicula {
     public HashMap<String, Actor> actoresDirigidos(String director){
 
         HashMap<String,Actor> devuelto = new HashMap<>();
+
+        //control sonbre el director
+        if(director==null){
+            return devuelto;
+        }
 
         Iterator<String> iterador = this.actores.keySet().iterator();
         String tipo;
@@ -206,7 +212,7 @@ public class Pelicula {
                 while (iteratorPeli.hasNext()){
                     pelicula= iteratorPeli.next();
 
-                    //si no tuvieron exito
+                    //si no tuvieron exito las peliculsa
                     if(!pelicula.exito()){
                         //añadimos el actor
                         solucion.add(actor);
@@ -222,11 +228,72 @@ public class Pelicula {
 
         //recorremos los actores
 
-        for(String tipo : this.actores.keySet()){
+        float presupuesto=0;
 
+        for(HashMap<String,Actor> actores: this.actores.values()){
+            for(Actor actor : actores.values()){
+                //sumamos el cache de cada actor
+                presupuesto+=actor.getCache();
+            }
         }
 
+        return presupuesto;
+    }
 
+    @Override
+    public int hashCode(){
+        int valor=1;
+        final int primo = 67;
+        if(this.nombre.equals("NOT-VALID-NAME"))return 0;
+        return primo*valor + this.nombre.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) { //metodo equals para paquete
+
+        if(this == obj){
+            return true;
+        }
+        if(obj == null){
+            return false;
+        }
+        if(this.getClass() != obj.getClass()){
+            return false;
+        }
+        final Pelicula nuevo = (Pelicula) obj;
+        //Si los nombres de las peliculas no son iguales
+        if (!this.nombre.equals(nuevo.nombre)){
+                return false;
+        }
+        return true;
+    }
+
+    private String imprimirActores() { //funcion auxiliar que nos permite imprimir los actores
+        String cadena = "[";
+
+        for ( String Tipo : this.actores.keySet()) {
+            cadena += "{"+"\""+this.actores.get(Tipo)+"\": [";
+            for(String nombre : this.actores.get(Tipo).keySet()){
+                cadena+= "\""+this.actores.get(Tipo).get(nombre)+"\",";
+            }
+            cadena += " ] },\n";
+        }
+        cadena += " ]\n}";
+        return cadena;
+    }
+
+    @Override
+    public String toString(){
+        return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
+                + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
+                + (this.anho>=1985 && this.anho<=2022 ? " \"anho\" : \"" +  this.anho + "\",\n" : "")
+                + (this.duracion>5 ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
+                + (this.director!=null ? " \"director\" : " +  this.director + ",\n" : "")
+                + (this.recaudacion>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
+                + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
+                + (!this.actores.isEmpty() ? " \"actores\" : " +  imprimirActores() + ",\n" : "")
+
+                + "}";
     }
 
 

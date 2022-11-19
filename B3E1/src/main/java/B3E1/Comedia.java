@@ -7,7 +7,8 @@ public class Comedia extends Pelicula {
     }
 
     public float presupuesto(){
-
+        //el presupuesto en caso de que sea comedia el 20% mas
+        //utilizamos el super para utilizar el metodo presupuesto
         this.presupuesto = super.presupuesto()*1.2f;
 
         return presupuesto;
