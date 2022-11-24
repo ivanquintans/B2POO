@@ -278,32 +278,34 @@ public class Pelicula {
         return true;
     }
 
-    private String imprimirActores() { //funcion auxiliar que nos permite imprimir los actores
+    private String imprimirActores(String tipo) { //funcion auxiliar que nos permite imprimir los actores
         String cadena = "[";
 
-        for ( String Tipo : this.actores.keySet()) {
-            cadena += "{"+"\""+this.actores.get(Tipo)+"\": [";
-            for(String nombre : this.actores.get(Tipo).keySet()){
-                cadena+= "\""+this.actores.get(Tipo).get(nombre)+"\",";
-            }
-            cadena += " ] },\n";
+        cadena += "{"+"\""+tipo+"\": [";
+        for(String nombre : this.actores.get(tipo).keySet()){
+            cadena += "\""+this.actores.get(tipo).get(nombre)+"\",";
         }
-        cadena += " ]\n}";
+        cadena += " ] },\n";
         return cadena;
     }
 
     @Override
     public String toString(){
-        return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
+        String imprimir= "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
                 + (this.anho>=1985 && this.anho<=2022 ? " \"anho\" : \"" +  this.anho + "\",\n" : "")
                 + (this.duracion>5 ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
                 + (this.director!=null ? " \"director\" : " +  this.director + ",\n" : "")
                 + (this.recaudacion>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
-                + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
-                + (!this.actores.isEmpty() ? " \"actores\" : " +  imprimirActores() + ",\n" : "")
+                + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");
+                for(String tipo : this.actores.keySet()){
+                    if(!this.actores.get(tipo).isEmpty()){
+                        imprimir+=(" \"actores\" : " +  imprimirActores(tipo) + ",\n");
+                    }
+                }
+                imprimir+="}";
 
-                + "}";
+                return imprimir;
     }
 
 
