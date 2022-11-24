@@ -261,8 +261,9 @@ public class Planta {
     public Set<Sensor> sensoresTipo(String tipo){
 
         //si el tipo no es valido devuelvo vacio el set
-
         Set<Sensor> devuleto = new HashSet<Sensor>();
+
+        if(tipo==null) return devuleto;
 
         Iterator<Estancia> iteradorEstancia = this.estancias.values().iterator();
         Estancia estancia;

@@ -118,7 +118,12 @@ public class Pelicula {
 
     /*Metodos Funcionales*/
 
+    /*SI ACTOR ESTA EN PRINCIPALES NO SE PUEDE METER EN SECUNDARIOS*/
     public boolean darAlta(String rol, ArrayList<Actor> actores) {
+
+        if (actores!=null && actores.isEmpty()){
+            return false;
+        }
 
         boolean flag=true; //comprobador
         if (rol != null) {
@@ -128,14 +133,19 @@ public class Pelicula {
                 //si es null no añadimos nada.
                 for (Actor actor : actores) {
                     for (String tipo : this.actores.keySet()) {
-                        //añadimos en el tipo que queremos los actores al hashmap
-                        this.actores.get(tipo).put(actor.getNombre(), actor);
-                        //comprobamos si se añadio correctamente algun elemento
-                        if(!this.actores.get(tipo).containsKey(actor.getNombre())){
-                            //si hay algun valor que no lo añade bien,devolvemos false
-                            flag=false;
+                        //controlamos que el actor no este en el rol diferente
+                        if (this.actores.get(tipo).containsKey(actor.getNombre())) {
+                            return false;
                         }
                     }
+                    //añadimos en el tipo que queremos los actores al hashmap
+                    this.actores.get(rol).put(actor.getNombre(), actor);
+                    //comprobamos si se añadio correctamente algun elemento
+                    if(!this.actores.get(rol).containsKey(actor.getNombre())){
+                        //si hay algun valor que no lo añade bien,devolvemos false
+                        flag=false;
+                    }
+
                 }
             }
         }
