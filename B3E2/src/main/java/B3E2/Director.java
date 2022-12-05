@@ -1,9 +1,6 @@
 package B3E2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Director {
 
@@ -14,6 +11,10 @@ public class Director {
     private ArrayList<Pelicula> peliculas;
 
     private Set<String> especialista;
+
+    //lista de nombres de clase para comprobar  que las clases
+
+    private final ArrayList<String> nombreclases = new ArrayList<>(Arrays.asList("Accion","Actor","Comedia","ComediaNegra","ComediaRomantica","Ficcion","Guerra","Parodia","Psicologico","Robos","Terror","TerrorGotico","Thriller","Zombies"));
 
 
     /*Constructor*/
@@ -34,16 +35,27 @@ public class Director {
     }
 
     public void setCache(HashMap<String, Float> cache) {
+        this.cache = new HashMap<>();
         if(cache!=null){
-            this.cache = new HashMap<>(cache);
+            for(String nombre : cache.keySet()) {
+                //si el nombre es un nombre de las clases
+                if (nombreclases.contains(nombre)) {
+                    this.cache.put(nombre, cache.get(nombre));
+                }
+            }
         }
-
     }
 
     public void setEspecialista(Set<String> especialista) {
 
-        if(especialista!=null){
-            this.especialista = new HashSet<>(especialista);
+        this.especialista = new HashSet<>();
+        if(especialista!=null) {
+            for (String genero : especialista) {
+                //si el nombre es un nombre de las clases
+                if (nombreclases.contains(genero)) {
+                    this.especialista.add(genero);
+                }
+            }
         }
     }
 
@@ -73,10 +85,12 @@ public class Director {
     public void introducirPelicula(Pelicula pelicula){
 
         if(pelicula!=null){
-            //si el genero coincide con alguno en el que sea especialista añadimos
-            if(this.especialista.contains(pelicula.getClass().getSimpleName())){
-                //añadimos la pelicula
-                this.peliculas.add(pelicula);
+            if(!this.peliculas.contains(pelicula)) {
+                //si el genero coincide con alguno en el que sea especialista añadimos
+                if (this.especialista.contains(pelicula.getClass().getSimpleName())) {
+                    //añadimos la pelicula
+                    this.peliculas.add(pelicula);
+                }
             }
         }
     }
@@ -90,6 +104,7 @@ public class Director {
 
         int contador=0;
         if(actor==null) {
+            //valor con el que se controla que no es valido
             contador=Integer.MIN_VALUE;
             return contador;
         }

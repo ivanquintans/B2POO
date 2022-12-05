@@ -188,7 +188,7 @@ public class Actor {
      *
      * @return el total de ganancias = numero de peliculas por cache de actor
      */
-    public float totalaGanancias(){
+    public float totalGanancias(){
 
         //debemos recorrer las peliculas que hizo el actor
         //y recorrer el presupuesto de estas
@@ -220,11 +220,12 @@ public class Actor {
      */
     public Set<String> deseosNoCumplidos(){
 
-        //si en todas las peliculas que recorremos no esta el director lo ñadimos
-        boolean flag =true;
+
 
         Set<String> noCumplidos = new HashSet<>();
         for(String deseo : this.deseos) {
+            //si en todas las peliculas que recorremos no esta el director lo ñadimos
+            boolean flag =true;
             for (Pelicula pelicula : this.peliculas.values()) {
                 if (deseo.equals(pelicula.getDirector())) flag=false;
 

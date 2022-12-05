@@ -12,13 +12,13 @@ public class PrincipalB3E1 {
 
         Actor actor1= new Actor("Cameron Diaz",new ArrayList<String>(Arrays.asList("Steven Spielberg" , "Martin Scorsese")),20);
         Actor actor2= new Actor("Ben Stiller",new ArrayList<String>(Arrays.asList("Steven Spielberg" , "Martin Scorsese")),15);
-        Actor actor3= new Actor("Matthew McConaughey",new ArrayList<String>(Arrays.asList("Christofer Nolan", "Woody Allen", "Martin Scorsese")),25);
-        Actor actor4= new Actor("Anne Hathaway",new ArrayList<String>(Arrays.asList("Christofer Nolan", "Woody Allen", "Martin Scorsese")),30);
-        Actor actor5= new Actor("Leonardo DiCaprio",new ArrayList<String>(Arrays.asList("Christofer Nolan", "Quentin Tarantino" ,"Clint Eastwood")),50);
-        Actor actor6= new Actor("Marion Cotillard",new ArrayList<String>(Arrays.asList("Christofer Nolan" ,"David Fincher" ,"Pedro Almodóvar" ,"Roger Mitchell")),15);
+        Actor actor3= new Actor("Matthew McConaughey",new ArrayList<String>(Arrays.asList("Christopher Nolan", "Woody Allen", "Martin Scorsese")),25);
+        Actor actor4= new Actor("Anne Hathaway",new ArrayList<String>(Arrays.asList("Christopher Nolan", "Woody Allen", "Martin Scorsese")),30);
+        Actor actor5= new Actor("Leonardo DiCaprio",new ArrayList<String>(Arrays.asList("Christopher Nolan", "Quentin Tarantino" ,"Clint Eastwood")),50);
+        Actor actor6= new Actor("Marion Cotillard",new ArrayList<String>(Arrays.asList("Christopher Nolan" ,"David Fincher" ,"Pedro Almodóvar" ,"Roger Mitchell")),15);
         Actor actor7= new Actor("Christian Bale",new ArrayList<String>(Arrays.asList("Quentin Tarantino", "Francis Ford Coppola", "Clint Eastwood", "Tim Burton")),20);
         Actor actor8= new Actor("Gary Oldman",new ArrayList<String>(Arrays.asList("Martin Scorsese", "James Cameron", "Alejandro Amenábar", "Guillermo del Toro")),20);
-        Actor actor9= new Actor(" Matt Damon",new ArrayList<String>(Arrays.asList("Christofer Nolan", "Greta Gerwig", "Steven Spielberg", "Woody Allen")),40);
+        Actor actor9= new Actor(" Matt Damon",new ArrayList<String>(Arrays.asList("Christopher Nolan", "Greta Gerwig", "Steven Spielberg", "Woody Allen")),40);
         Actor actor10= new Actor("Daniel Day-Lewis",new ArrayList<String>(Arrays.asList("Quentin Tarantino", "M. Night Shymalan", "Paul Thomas Anderson")),70);
         Actor actor11= new Actor("John Travolta",new ArrayList<String>(Arrays.asList("Ridley Scott", "Sofia Coppola", "Danny Boyle", "Hermanos Coen")),25);
         Actor actor12= new Actor("Bruce Willis",new ArrayList<String>(Arrays.asList("Steven Spielberg", "M. Night Shymalan", "Martin Scorsese", "Alfonso Cuarón")),30);
@@ -26,11 +26,11 @@ public class PrincipalB3E1 {
         Actor actor14= new Actor("Morgan Freeman",new ArrayList<String>(Arrays.asList("Steven Spielberg", "Ridley Scott", "James Cameron", "Martin Scorsese")),15);
         Actor actor15= new Actor("Jack Nicholson",new ArrayList<String>(Arrays.asList("Ridley Scott", "Jean Jacques Annaud", "Roman Polanski", "Woody Allen")),20);
         Actor actor16= new Actor("Liam Neeson",new ArrayList<String>(Arrays.asList("Quentin Tarantino", "Sofia Coppola", "J.J. Abrahams", "M. Night Shymalan")),20);
-        Actor actor17= new Actor("Al Pacino",new ArrayList<String>(Arrays.asList("Martin Scorsese", "Christofer Nolan", "J.J. Abrahams", "Sofia Coppola")),50);
+        Actor actor17= new Actor("Al Pacino",new ArrayList<String>(Arrays.asList("Martin Scorsese", "Christopher Nolan", "J.J. Abrahams", "Sofia Coppola")),50);
         Actor actor18= new Actor("Julia Roberts",new ArrayList<String>(Arrays.asList("Sofia Coppola", "Quentin Tarantino", "Martin Scorsese", "Clint Eastwood")),80);
         Actor actor19= new Actor("Hugh Grant",new ArrayList<String>(Arrays.asList("Quentin Tarantino", "Clint Eastwood", "Greta Gerwig", "Mel Gibson")),55);
         Actor actor20= new Actor("Brad Pitt",new ArrayList<String>(Arrays.asList("Martin Scorsese", "Sofia Coppola", "Paul Haggis")),80);
-
+        Actor actor21=new Actor("Haley Joel Osment",15f);
 
         //APARTADO B
         //mostramos por pantalla las caracteristicas de los actores 1,2,3,4,5,6
@@ -139,8 +139,10 @@ public class PrincipalB3E1 {
 
         System.out.println("\nAPARTADO I\n");
 
-        /*Mostrar el conjunto de actores no las caracteristicas*/
-        System.out.println(pelicula1.actoresDirigidos("Martin Scorsese"));
+
+        for(String nombre : pelicula1.actoresDirigidos("Martin Scorsese").keySet()){
+            System.out.println(nombre+",");
+        }
 
 
         //APARTADO J
@@ -148,8 +150,9 @@ public class PrincipalB3E1 {
 
         System.out.println("\nAPARTADO J:\n");
 
-        /*Mostrar el conjunto de actores no las caracteristicas*/
-        System.out.println(pelicula6.actoresDirigidos("Christopher Nolan"));
+        for(String nombre : pelicula6.actoresDirigidos("Christopher Nolan").keySet()){
+            System.out.println(nombre+",");
+        }
 
         //APARTADO K
         //mostramos por pantalla si las peliculas 4,5,6,7 han tenido exito
@@ -166,6 +169,7 @@ public class PrincipalB3E1 {
         //APARTADO l
         /*Enunciado bastante xd*/
         System.out.println("\nAPARTADO L:");
+        System.out.println(pelicula1.actoresFracaso());
 
 
 
@@ -174,58 +178,88 @@ public class PrincipalB3E1 {
 
         System.out.println("\nAPARTADO M:\n");
 
-        /*en get presupuesto llamar al metodo??*/
-        System.out.println("Pelicula 1: "+pelicula1.presupuesto());
-        System.out.println("Pelicula 2: "+pelicula2.presupuesto());
-        System.out.println("Pelicula 9: "+pelicula9.presupuesto());
-        System.out.println("Pelicula 10: "+pelicula10.presupuesto());
 
-        /*Hacer lo que queda con chris*/
+        System.out.println("Pelicula 1: "+pelicula1.getPresupuesto());
+        System.out.println("Pelicula 2: "+pelicula2.getPresupuesto());
+        System.out.println("Pelicula 9: "+pelicula9.getPresupuesto());
+        System.out.println("Pelicula 10: "+pelicula10.getPresupuesto());
+
         //APARTADO N
-        //mostramos por pantalla las caracteristicas de los sensores temperatura
 
         System.out.println("\nAPARTADO N:\n");
 
+        System.out.println("Actor 1: "+actor1.peliculasDeGenero("Ficcion"));
+        System.out.println("Actor 2: "+actor2.peliculasDeGenero("Ficcion"));
+        System.out.println("Actor 3: "+actor3.peliculasDeGenero("Ficcion"));
+
+
 
         //APARTADO O
-        //mostramos por pantalla las caracteristicas de los sensores sonido
 
         System.out.println("\nAPARTADO O:\n");
 
+        System.out.println("Actor 7: "+actor7.peliculasDeGenero("ComediaRomantica"));
+        System.out.println("Actor 8: "+actor8.peliculasDeGenero("ComediaRomantica"));
+        System.out.println("Actor 9: "+actor9.peliculasDeGenero("ComediaRomantica"));
+
 
         //APARTADO P
-        //IMPRIMIMOS EL SENSOR CON VALOR MAXIMO Y MINIMO DE TEMPERATURA
 
-        //SENSOR MAX VALOR
 
         System.out.println("\nAPARTADO P:\n");
 
+        System.out.println("Actor 10: "+actor10.peliculasDeGenero("Psicologico"));
+        System.out.println("Actor 11: "+actor11.peliculasDeGenero("Psicologico"));
+        System.out.println("Actor 12: "+actor12.peliculasDeGenero("Psicologico"));
+
         //APARTADO Q
-        //MOSTRAMOS LOS VALORES PARA EL SENSOR CON ID 301 CUYOS VALORES MAYORES QUE 33
 
         System.out.println("\nAPARTADO Q:\n");
 
+        System.out.println("Actor 13: "+actor13.peliculasDeGenero("Thriller"));
+        System.out.println("Actor 14: "+actor14.peliculasDeGenero("Thriller"));
+        System.out.println("Actor 15: "+actor15.peliculasDeGenero("Thriller"));
+
 
         //APARTADO R
-        //AÑADIR EL SENSOR 8
 
         System.out.println("\nAPARTADO R:\n");
 
+        System.out.println("Actor 1: "+actor1.importancia("principal"));
+        System.out.println("Actor 2: "+actor2.importancia("principal"));
+        System.out.println("Actor 3: "+actor3.importancia("principal"));
+        System.out.println("Actor 4: "+actor4.importancia("principal"));
+
 
         //APARTADO S
-        //mostramos por pantalla la estancia1
 
         System.out.println("\nAPARTADO S:\n");
 
+        System.out.println("Actor 5: "+actor5.importancia("secundario"));
+        System.out.println("Actor 6: "+actor6.importancia("secundario"));
+        System.out.println("Actor 7: "+actor7.importancia("secundario"));
+        System.out.println("Actor 8: "+actor8.importancia("secundario"));
+
         //APARTADO T
-        //mostramos por pantalla los valores de los sensores ruido
+
 
         System.out.println("\nAPARTADO T:\n");
 
+        System.out.println("Actor 10: "+actor10.totalGanancias());
+        System.out.println("Actor 11: "+actor11.totalGanancias());
+        System.out.println("Actor 12: "+actor12.totalGanancias());
+        System.out.println("Actor 13: "+actor13.totalGanancias());
+        System.out.println("Actor 14: "+actor14.totalGanancias());
+
         //APARTADO U
-        //mostramos por pantalla los identificadores de los sensores con valor mayor a 40
+
 
         System.out.println("\nAPARTADO U:\n");
+
+        System.out.println("Actor 15: "+actor15.deseosNoCumplidos());
+        System.out.println("Actor 16: "+actor16.deseosNoCumplidos());
+        System.out.println("Actor 17: "+actor17.deseosNoCumplidos());
+        System.out.println("Actor 18: "+actor18.deseosNoCumplidos());
 
 
 

@@ -166,7 +166,7 @@ public class Pelicula {
     }
 
     /**
-     * comprueba los actores dirigidos por un actor
+     * devuelve los actores dirigidos por un actor
      * @param director
      * @return un Hashmap con los actores dirgidos por el actor
      */

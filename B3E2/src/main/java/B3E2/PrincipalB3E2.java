@@ -27,6 +27,7 @@ public class PrincipalB3E2 {
     Actor actor18= new Actor("Julia Roberts",new ArrayList<String>(Arrays.asList("Sofia Coppola", "Quentin Tarantino", "Martin Scorsese", "Clint Eastwood")),80);
     Actor actor19= new Actor("Hugh Grant",new ArrayList<String>(Arrays.asList("Quentin Tarantino", "Clint Eastwood", "Greta Gerwig", "Mel Gibson")),55);
     Actor actor20= new Actor("Brad Pitt",new ArrayList<String>(Arrays.asList("Martin Scorsese", "Sofia Coppola", "Paul Haggis")),80);
+    Actor actor21=new Actor("Haley Joel Osment",15f);
 
 
     ComediaRomantica pelicula1 = new ComediaRomantica("Algo pasa con Mary",1998,null,	"Hermanos Farrelly",90);
@@ -61,8 +62,8 @@ public class PrincipalB3E2 {
         pelicula7.darAlta("principal",new ArrayList<Actor>(Collections.singletonList(actor11)));
         pelicula7.darAlta("secundario",new ArrayList<Actor>(Collections.singletonList(actor12)));
 
-    /*Actor random xd*/
-        pelicula8.darAlta("principal",new ArrayList<Actor>(Collections.singletonList(actor12)));
+
+        pelicula8.darAlta("principal",new ArrayList<Actor>(Arrays.asList(actor12,actor21)));
 
         pelicula9.darAlta("principal",new ArrayList<Actor>(Arrays.asList(actor18,actor19)));
 
@@ -73,11 +74,11 @@ public class PrincipalB3E2 {
 
         Director director1 = new Director("Hermanos Farrelly",new HashSet<String>(){{add("ComediaRomantica");add("ComediaNegra");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);put("ComediaNegra",1.5f);}});
         Director director2 = new Director("Christopher Nolan",new HashSet<String>(){{add("Ficcion");add("Guerra");add("Thriller");}},new HashMap<String,Float>(){{put("Ficcion",2f);put("Guerra",2f);put("Thriller",2f);}});
-        Director director3 = new Director("Martin Scorsese",new HashSet<String>(){{add("Thriller");add("Psicologico");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);}});
-        Director director4= new Director("Quentin Tarantino",new HashSet<String>(){{add("ComediaNegra");add("Ficcion");add("Guerra");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);}});
-        Director director5 = new Director("M. Night Shymalan",new HashSet<String>(){{add("Psicologico");add("Ficcion");add("TerrorGotico");add("ComediaRomantica");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);}});
-        Director director6 = new Director("Roger Mitchell",new HashSet<String>(){{add("ComediaRomantica");add("Parodia");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);}});
-        Director director7 = new Director("Steven Soderberg",new HashSet<String>(){{add("DeRobos");add("Thriller");add("Ficcion");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);}});
+        Director director3 = new Director("Martin Scorsese",new HashSet<String>(){{add("Thriller");add("Psicologico");}},new HashMap<String,Float>(){{put("Thriller",2f);put("Psicologico",2f);}});
+        Director director4= new Director("Quentin Tarantino",new HashSet<String>(){{add("ComediaNegra");add("Ficcion");add("Guerra");}},new HashMap<String,Float>(){{put("ComediaNegra",2f);put("Ficcion",2f);put("Guerra",2f);}});
+        Director director5 = new Director("M. Night Shymalan",new HashSet<String>(){{add("Psicologico");add("Ficcion");add("TerrorGotico");add("ComediaRomantica");}},new HashMap<String,Float>(){{put("Psicologico",2f);put("Ficcion",2f);put("TerrorGotico",2f);put("ComediaRomantica",2f);}});
+        Director director6 = new Director("Roger Mitchell",new HashSet<String>(){{add("ComediaRomantica");add("Parodia");}},new HashMap<String,Float>(){{put("ComediaRomantica",2f);put("Parodia",2f);}});
+        Director director7 = new Director("Steven Soderberg",new HashSet<String>(){{add("DeRobos");add("Thriller");add("Ficcion");}},new HashMap<String,Float>(){{put("DeRobos",2f);put("Thriller",2f);put("Ficcion",2f);}});
 
     //APARTADO G
     //mostrar por pantalla los actroes 1,5,7,8,9
