@@ -1,4 +1,4 @@
-package B3E1;
+package B3E2;
 
 import java.util.*;
 
@@ -71,11 +71,9 @@ public class Pelicula {
     }
 
     public void setDuracion(Integer duracion) {
-        //como no es primitivo tenemos que comprobar
-        if(duracion!=null) {
-            if (duracion > 5) {
-                this.duracion = duracion;
-            }
+
+        if(duracion>5){
+            this.duracion=duracion;
         }
 
     }
@@ -120,12 +118,7 @@ public class Pelicula {
 
     /*Metodos Funcionales*/
 
-    /**
-     * damos de alta los actores en una pelicula
-     * @param rol
-     * @param actores
-     * @return true si se introducen correctamente
-     */
+    /*SI ACTOR ESTA EN PRINCIPALES NO SE PUEDE METER EN SECUNDARIOS*/
     public boolean darAlta(String rol, ArrayList<Actor> actores) {
 
         if (actores!=null && actores.isEmpty()){
@@ -159,17 +152,9 @@ public class Pelicula {
                 }
             }
         }
-        //actualizamos el presupuesto
-        this.presupuesto=this.presupuesto();
 
         return flag;
     }
-
-    /**
-     * comprueba los actores dirigidos por un actor
-     * @param director
-     * @return un Hashmap con los actores dirgidos por el actor
-     */
     public HashMap<String, Actor> actoresDirigidos(String director){
 
         HashMap<String,Actor> devuelto = new HashMap<>();
@@ -209,10 +194,7 @@ public class Pelicula {
         return devuelto;
     }
 
-    /**
-     * comprueba que sea exito la pelicula o no
-     * @return true si la recaudacion es tres veces mayor que el presupuesto
-     */
+    /*Metodo presupuesto o atributo*/
     public boolean exito(){
 
         //llamamos al metodo presupuesto
@@ -223,10 +205,6 @@ public class Pelicula {
         return false;
     }
 
-    /**
-     *
-     * @return un set con los actores que participaron en peliculas que no fueron un exito
-     */
     public Set<Actor> actoresFracaso(){
 
         Set<Actor> solucion = new HashSet<>();
@@ -259,11 +237,6 @@ public class Pelicula {
     }
 
     //para poder aplicar la herencia debemos de cambiar el tipo del metodo para que retorne algo
-
-    /**
-     * cambio de tipo de la funcion y el atributo pasa a ser protected en vez de private(profesora)
-     * @return el valor del presupuesto
-     */
     public float presupuesto(){
 
         //recorremos los actores
@@ -309,11 +282,6 @@ public class Pelicula {
         return true;
     }
 
-    /**
-     * funcion auxiliar
-     * @param tipo
-     * @return  imprime los actores de forma optipa(toString)
-     */
     private String imprimirActores(String tipo) { //funcion auxiliar que nos permite imprimir los actores
         String cadena = "";
         boolean flag = false;
@@ -337,7 +305,7 @@ public class Pelicula {
         String imprimir= "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
                 + (this.anho>=1985 && this.anho<=2022 ? " \"anho\" : \"" +  this.anho + "\",\n" : "")
-                + (this.duracion!=null && this.duracion>5  ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
+                + (this.duracion>5 ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
                 + (this.director!=null ? " \"director\" : " +  this.director + ",\n" : "")
                 + (this.recaudacion>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
                 + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");

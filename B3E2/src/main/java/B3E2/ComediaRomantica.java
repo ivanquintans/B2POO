@@ -1,4 +1,4 @@
-package B3E1;
+package B3E2;
 
 public class ComediaRomantica extends Comedia {
 
@@ -6,4 +6,8 @@ public class ComediaRomantica extends Comedia {
         super(nombre, anho, duracion, director, recaudacion);
     }
 
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

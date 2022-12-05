@@ -48,16 +48,16 @@ public class PrincipalB3E1 {
         //crear las instancias pelicula
 
         /*CAmbiar el 50*/
-        Pelicula pelicula1 = new ComediaRomantica("Algo pasa con Mary",1998,50,	"Hermanos Farrelly",90);
-        Pelicula pelicula2 = new Ficcion("Interstellar",2014,169,"Christopher Nolan",100);
-        Pelicula pelicula3 = new Ficcion("Origen",2010,148,"Christopher Nolan",300);
-        Pelicula pelicula4 = new Ficcion("El caballero oscuro",2008,152,"Christopher Nolan",500);
-        Pelicula pelicula5 = new Thriller("Infiltrados",2006,151,"Martin Scorsese",80);
-        Pelicula pelicula6 = new Thriller("Gans of New York",2002,166,"Martin Scorsese",70);
-        Pelicula pelicula7 = new ComediaNegra("Pulp Fiction",1994,153,"Quentin Tarantino",50);
-        Pelicula pelicula8 = new Psicologico("El sexto sentido",1999,107,"M. Night Shymalan",90);
-        Pelicula pelicula9 = new ComediaRomantica("Noting Hill",1999,166,"Roger Mitchell",124);
-        Pelicula pelicula10  = new Robos("Ocean 11",2011,117,"Steven Soderberg",400);
+        ComediaRomantica pelicula1 = new ComediaRomantica("Algo pasa con Mary",1998,null,	"Hermanos Farrelly",90);
+        Ficcion pelicula2 = new Ficcion("Interstellar",2014,169,"Christopher Nolan",100);
+        Ficcion pelicula3 = new Ficcion("Origen",2010,148,"Christopher Nolan",300);
+        Ficcion pelicula4 = new Ficcion("El caballero oscuro",2008,152,"Christopher Nolan",500);
+        Thriller pelicula5 = new Thriller("Infiltrados",2006,151,"Martin Scorsese",80);
+        Thriller pelicula6 = new Thriller("Gans of New York",2002,166,"Martin Scorsese",70);
+        ComediaNegra pelicula7 = new ComediaNegra("Pulp Fiction",1994,153,"Quentin Tarantino",50);
+        Psicologico pelicula8 = new Psicologico("El sexto sentido",1999,107,"M. Night Shymalan",90);
+        ComediaRomantica pelicula9 = new ComediaRomantica("Noting Hill",1999,166,"Roger Mitchell",124);
+        Robos pelicula10  = new Robos("Ocean 11",2011,117,"Steven Soderberg",400);
 
 
         //APARTADO D
@@ -101,60 +101,86 @@ public class PrincipalB3E1 {
 
         pelicula10.darAlta("principal",new ArrayList<Actor>(Arrays.asList(actor18,actor20,actor9)));
 
-
-
-
-
-
-
-        System.out.println("APARTADO E:\n");
-
-
         //APARTADO F
-        //mostramos por pantalla los sensores
+        //mostramos por pantalla los peliculas 1,2,3,4,5,6,7,8
 
         System.out.println("\nAPARTADO F:\n");
 
+        System.out.println(pelicula1);
+        System.out.println(pelicula2);
+        System.out.println(pelicula3);
+        System.out.println(pelicula4);
+        System.out.println(pelicula5);
+        System.out.println(pelicula6);
+        System.out.println(pelicula7);
+        System.out.println(pelicula8);
+
         //APARTADO G
-        //mostrar por pantalla la estancia1
+        //mostrar por pantalla los actroes 1,5,7,8,9
 
         System.out.println("\nAPARTADO G:\n");
 
+        System.out.println(actor1);
+        System.out.println(actor5);
+        System.out.println(actor7);
+        System.out.println(actor8);
+        System.out.println(actor9);
+        System.out.println(actor10);
+
         //APARTADO H
-        //dar de alta los sensores 5,6,7
+        //Mostrar por pantalla las peliculas en las que haya participado el actor 5
 
         System.out.println("\nAPARTADO H:\n");
 
+        System.out.println(actor5.getPeliculas());
+
         //APARTADO I
-        //mostramos por pantalla limites superiores y inferiores
+        //mostramos por pantalla los actores dirigidos por MArtin Scorsese
 
         System.out.println("\nAPARTADO I\n");
 
+        /*Mostrar el conjunto de actores no las caracteristicas*/
+        System.out.println(pelicula1.actoresDirigidos("Martin Scorsese"));
+
 
         //APARTADO J
-        //mostramos por pantalla los sensores 5,6,7
+        //mostramos por pantalla los actores dirigidos por Christopher Nolan
 
         System.out.println("\nAPARTADO J:\n");
 
-        //APARTADO K
-        //mostramos por pantalla la estancia1
+        /*Mostrar el conjunto de actores no las caracteristicas*/
+        System.out.println(pelicula6.actoresDirigidos("Christopher Nolan"));
 
-        //COMO NO TIENE VALORES ALGUNOS SESNSORES NOS DAN DE MEDIA EL VALOR PARA FLOAT MINIMO
+        //APARTADO K
+        //mostramos por pantalla si las peliculas 4,5,6,7 han tenido exito
 
         System.out.println("\nAPARTADO K:\n");
 
+        /*revisar*/
+        System.out.println("Pelicula 4: "+pelicula4.exito());
+        System.out.println("Pelicula 5: "+pelicula5.exito());
+        System.out.println("Pelicula 6: "+pelicula6.exito());
+        System.out.println("Pelicula 7: "+pelicula7.exito());
+
 
         //APARTADO l
-        //añadimos los valores
+        /*Enunciado bastante xd*/
         System.out.println("\nAPARTADO L:");
 
 
 
         //APARTADO M
-        //mostramos por pantalla la estancia1
+        //mostramos por pantalla el presupuesto de las peliculas 1,2,9,10
 
         System.out.println("\nAPARTADO M:\n");
 
+        /*en get presupuesto llamar al metodo??*/
+        System.out.println("Pelicula 1: "+pelicula1.presupuesto());
+        System.out.println("Pelicula 2: "+pelicula2.presupuesto());
+        System.out.println("Pelicula 9: "+pelicula9.presupuesto());
+        System.out.println("Pelicula 10: "+pelicula10.presupuesto());
+
+        /*Hacer lo que queda con chris*/
         //APARTADO N
         //mostramos por pantalla las caracteristicas de los sensores temperatura
 

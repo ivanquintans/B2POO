@@ -1,4 +1,4 @@
-package B3E1;
+package B3E2;
 
 import java.util.*;
 
@@ -90,10 +90,6 @@ public class Actor {
 
     /*Metodos funcionales*/
 
-    /**
-     * añadimos una nueva pelicula al actor
-     * @param pelicula
-     */
     public void introducirPelicula(Pelicula pelicula){
 
         //si la pelicula que le pasamos es una pelicula valida
@@ -102,12 +98,6 @@ public class Actor {
             this.peliculas.put(pelicula.getNombre(),pelicula);
         }
     }
-
-    /**
-     *
-     * @param genero
-     * @return devuelve un set con todas las peliculas con el genero que indiquemos en las que haya participado el actor
-     */
     public Set<Pelicula> peliculasDeGenero(String genero){
 
         Set<Pelicula> solucion = new HashSet<>();
@@ -127,11 +117,6 @@ public class Actor {
         return solucion;
     }
 
-    /**
-     *
-     * @param genero
-     * @return un arraylist de peliculas que hayan sido un fracaso
-     */
     public ArrayList<Pelicula> peliculasFracaso(String genero) {
 
         ArrayList<Pelicula> peliculas = new ArrayList<>();
@@ -152,11 +137,6 @@ public class Actor {
         return peliculas;
     }
 
-    /**
-     *
-     * @param tipoParticipacion
-     * @return devuelve el numero de veces que el actor participo con el tipo especificado
-     */
     public int importancia(String tipoParticipacion) {
 
         //debemos recorrer las peliculas del actor
@@ -184,17 +164,12 @@ public class Actor {
         return contador;
     }
 
-    /**
-     *
-     * @return el total de ganancias = numero de peliculas por cache de actor
-     */
     public float totalaGanancias(){
 
         //debemos recorrer las peliculas que hizo el actor
         //y recorrer el presupuesto de estas
 
         //declaramos el contador
-        int contadorPeliculas=0;
         float ganancias=0f;
 
         Map.Entry<String,Pelicula> peliculas;
@@ -203,36 +178,18 @@ public class Actor {
 
         while (iterador.hasNext()){
             peliculas=iterador.next();
-            //contamos el numero de peliculas que realiza el actor
-            contadorPeliculas+=1;
+            //metemos la recaudacion de la pelicula como ganancias del actor
+            ganancias+=peliculas.getValue().getRecaudacion();
 
         }
-        //lo que cobra el actor por cada pelicula
-        ganancias=contadorPeliculas*this.getCache();
-
-        //ganancia total
         return ganancias;
     }
 
-    /**
-     *
-     * @return un set con los deseos de actor que no han sido cumplidos
-     */
-    public Set<String> deseosNoCumplidos(){
+    /*NO ENTIENDO ESTA FUNCION*/
+    /*public Set<String> deseosNoCumplidos(){
 
-        //si en todas las peliculas que recorremos no esta el director lo ñadimos
-        boolean flag =true;
 
-        Set<String> noCumplidos = new HashSet<>();
-        for(String deseo : this.deseos) {
-            for (Pelicula pelicula : this.peliculas.values()) {
-                if (deseo.equals(pelicula.getDirector())) flag=false;
-
-            }
-            if (flag) noCumplidos.add(deseo);
-        }
-        return noCumplidos;
-    }
+    }*/
 
     @Override
     public int hashCode(){
@@ -262,10 +219,6 @@ public class Actor {
         return true;
     }
 
-    /**
-     *
-     * @return  imprime las peliculas de forma optipa(toString)
-     */
     private String imprimirPeliculas() { //funcion que me permite imprimir las peliculas en el to string
         String dato = "[";
 
@@ -283,10 +236,6 @@ public class Actor {
         return dato;
     }
 
-    /**
-     *
-     * @return  imprime los deseos de forma optipa(toString)
-     */
     private String imprimirDesesos() { //funcion que me permite imprimir las peliculas en el to string
         String dato = "[";
 
