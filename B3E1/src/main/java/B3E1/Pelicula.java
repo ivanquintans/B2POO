@@ -2,7 +2,7 @@ package B3E1;
 
 import java.util.*;
 
-public class Pelicula {
+public  class Pelicula {
 
     private String nombre;
 
@@ -51,7 +51,7 @@ public class Pelicula {
 
         //inicializamos el resto de atributos
 
-        this.presupuesto=0;
+        this.presupuesto=getPresupuesto();
         this.actores= new HashMap<>();
 
         //inicializamos el
@@ -340,7 +340,7 @@ public class Pelicula {
                 + (this.duracion!=null && this.duracion>5  ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
                 + (this.director!=null ? " \"director\" : " +  this.director + ",\n" : "")
                 + (this.recaudacion>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
-                + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");
+                + (this.presupuesto>0 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");
                 boolean flag = false;
                 for(String tipo : this.actores.keySet()) {
                     if (this.actores.get(tipo).isEmpty()) {

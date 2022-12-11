@@ -227,7 +227,7 @@ public class Actor {
             //si en todas las peliculas que recorremos no esta el director lo ñadimos
             boolean flag =true;
             for (Pelicula pelicula : this.peliculas.values()) {
-                if (deseo.equals(pelicula.getDirector())) flag=false;
+                if (deseo.equals(pelicula.getDirector().getNombre())) flag=false;
 
             }
             if (flag) noCumplidos.add(deseo);

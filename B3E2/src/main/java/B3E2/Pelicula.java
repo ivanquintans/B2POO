@@ -2,7 +2,7 @@ package B3E2;
 
 import java.util.*;
 
-public class Pelicula {
+public abstract class Pelicula {
 
     private String nombre;
 
@@ -13,17 +13,17 @@ public class Pelicula {
     //depende de la clave buscamos si es en el hash map de catores principales o de actores s
     private HashMap<String,HashMap<String,Actor>> actores;
 
-    private String director;
+    private Director director;
 
     protected float presupuesto;
 
-    private float recaudacion;
+    private HashMap<String,Float> recaudacion;
 
 
 
     /*Constructores*/
 
-    public Pelicula(String nombre,Integer anho,Integer duracion,String director,float recaudacion){
+    public Pelicula(String nombre,Integer anho,Integer duracion,Director director,HashMap<String,Float> recaudacion){
 
         //comprobamos el año
 
@@ -40,7 +40,9 @@ public class Pelicula {
         //comprobamos el director
 
         if(director!=null){
-            this.director=director;
+            this.director= new Director(director.getNombre(),director.getEspecialista(),director.getCache());
+            //no funciona porq la pelicula está a medio crear
+            //director.introducirPelicula(this);
         }
 
         //comprobamos el nombre de la pelicula
@@ -51,12 +53,14 @@ public class Pelicula {
 
         //inicializamos el resto de atributos
 
-        this.presupuesto=0;
+
         this.actores= new HashMap<>();
 
         //inicializamos el
         this.actores.put("principal",new HashMap<>());
         this.actores.put("secundario",new HashMap<>());
+
+        this.presupuesto=presupuesto();
 
     }
 
@@ -80,10 +84,16 @@ public class Pelicula {
 
     }
 
-    public void setRecaudacion(float recaudacion) {
-
-        if(recaudacion>=0){
-            this.recaudacion=recaudacion;
+    public void setRecaudacion(HashMap<String,Float> recaudacion) {
+        this.recaudacion = new HashMap<>();
+        if(recaudacion!=null){
+            //mete todos los elememntos
+            //comprobamos que el valor sea mayor que 5
+            for (String pais: recaudacion.keySet()){
+                if(recaudacion.get(pais) > 5f){
+                    this.recaudacion.put(pais,recaudacion.get(pais));
+                }
+            }
         }
 
     }
@@ -98,7 +108,7 @@ public class Pelicula {
         return presupuesto;
     }
 
-    public float getRecaudacion() {
+    public HashMap<String,Float> getRecaudacion() {
         return recaudacion;
     }
 
@@ -110,7 +120,7 @@ public class Pelicula {
         return actores;
     }
 
-    public String getDirector() {
+    public Director getDirector() {
         return director;
     }
 
@@ -170,7 +180,7 @@ public class Pelicula {
      * @param director
      * @return un Hashmap con los actores dirgidos por el actor
      */
-    public HashMap<String, Actor> actoresDirigidos(String director){
+    public HashMap<String, Actor> actoresDirigidos(Director director){
 
         HashMap<String,Actor> devuelto = new HashMap<>();
 
@@ -213,15 +223,7 @@ public class Pelicula {
      * comprueba que sea exito la pelicula o no
      * @return true si la recaudacion es tres veces mayor que el presupuesto
      */
-    public boolean exito(){
-
-        //llamamos al metodo presupuesto
-        if(this.recaudacion>3*this.presupuesto()){
-            return true;
-        }
-
-        return false;
-    }
+    public abstract boolean exito();
 
     /**
      *
@@ -276,9 +278,27 @@ public class Pelicula {
                 presupuesto+=actor.getCache();
             }
         }
+        //añadimos el presupuesto del director dependiendo de la clase en la que se encuentre
+        if (this.director.getCache().get(getClass().getSimpleName())!=null) {
+            presupuesto += this.director.getCache().get(getClass().getSimpleName());
+        }
         this.presupuesto=presupuesto;
         return presupuesto;
 
+    }
+
+    /**
+     * es final para que no sea sobrescrito en las clases
+     * @return la recaudacion total
+     */
+    public final float recaudacionTotal(){
+
+        float valor=0;
+
+        for(Float recaudacion : this.getRecaudacion().values()){
+            valor+=recaudacion;
+        }
+        return valor;
     }
 
     @Override
@@ -332,15 +352,24 @@ public class Pelicula {
         return cadena;
     }
 
+    private String imprimirRecaudacion() { //funcion que me permite imprimir las peliculas en el to string
+        String dato = "";
+
+        for (String pais : this.recaudacion.keySet()){
+            dato+="\t{ "+"\""+pais+"\""+", "+"\""+this.recaudacion.get(pais)+"\" },\n";
+        }
+        return dato;
+    }
+
     @Override
     public String toString(){
         String imprimir= "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
                 + (this.anho>=1985 && this.anho<=2022 ? " \"anho\" : \"" +  this.anho + "\",\n" : "")
                 + (this.duracion!=null && this.duracion>5  ? " \"duracion\" : \"" +  this.duracion + "\",\n" : "")
-                + (this.director!=null ? " \"director\" : " +  this.director + ",\n" : "")
-                + (this.recaudacion>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
-                + (this.presupuesto>5 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");
+                + (this.director!=null ? " \"director\" : " +  this.director.getNombre() + ",\n" : "")
+                + (!this.recaudacion.isEmpty() ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "")
+                + (this.presupuesto>0 ? " \"recaudacion\" : \"" +  this.recaudacion + "\",\n" : "");
                 boolean flag = false;
                 for(String tipo : this.actores.keySet()) {
                     if (this.actores.get(tipo).isEmpty()) {

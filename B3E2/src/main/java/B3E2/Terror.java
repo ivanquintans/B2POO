@@ -1,11 +1,29 @@
 package B3E2;
 
-public class Terror extends Pelicula{
+import java.util.HashMap;
 
-    public Terror(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public abstract class Terror extends Pelicula{
+
+    public Terror(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
+    public boolean exito(){
 
+        float cacheActores=0;
+        //recorro el cache de los actores
+        for(String tipo : this.getActores().keySet()){
+            for(String nombre : this.getActores().get(tipo).keySet()){
+                cacheActores+=this.getActores().get(tipo).get(nombre).getCache();
+            }
+        }
+        if(this.recaudacionTotal()>cacheActores){
+            return true;
+        }
+
+
+
+        return false;
+    }
     @Override
     public float presupuesto() {
 

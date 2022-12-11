@@ -1,8 +1,10 @@
 package B3E2;
 
-public class Comedia extends Pelicula {
+import java.util.HashMap;
 
-    public Comedia(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public abstract class Comedia extends Pelicula {
+
+    public Comedia(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
 
@@ -12,5 +14,15 @@ public class Comedia extends Pelicula {
         this.presupuesto = super.presupuesto()*1.2f;
 
         return presupuesto;
+    }
+
+    public boolean exito(){
+
+        //llamamos al metodo presupuesto
+        if(this.recaudacionTotal()>this.presupuesto()){
+            return true;
+        }
+
+        return false;
     }
 }

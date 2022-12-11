@@ -1,8 +1,11 @@
 package B3E2;
 
-public class Parodia extends Comedia {
+import java.util.HashMap;
 
-    public Parodia(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public final class Parodia extends Comedia {
+
+
+    public Parodia(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
 }

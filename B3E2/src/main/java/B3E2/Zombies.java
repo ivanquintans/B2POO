@@ -1,8 +1,11 @@
 package B3E2;
 
-public class Zombies extends Terror{
+import java.util.HashMap;
 
-    public Zombies(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public final class Zombies extends Terror{
+
+
+    public Zombies(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
 }

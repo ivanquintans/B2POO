@@ -1,8 +1,11 @@
 package B3E2;
 
-public class TerrorGotico extends Terror{
+import java.util.HashMap;
 
-    public TerrorGotico(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public final class TerrorGotico extends Terror{
+
+
+    public TerrorGotico(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
 }

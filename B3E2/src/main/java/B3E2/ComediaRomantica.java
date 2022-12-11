@@ -1,13 +1,10 @@
 package B3E2;
 
-public class ComediaRomantica extends Comedia {
+import java.util.HashMap;
 
-    public ComediaRomantica(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public final class ComediaRomantica extends Comedia {
+
+    public ComediaRomantica(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

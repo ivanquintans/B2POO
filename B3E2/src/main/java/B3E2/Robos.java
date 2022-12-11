@@ -1,8 +1,11 @@
 package B3E2;
 
-public class Robos extends Accion{
+import java.util.HashMap;
 
-    public Robos(String nombre, Integer anho, Integer duracion, String director, float recaudacion) {
+public final class Robos extends Accion{
+
+
+    public Robos(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
         super(nombre, anho, duracion, director, recaudacion);
     }
 }

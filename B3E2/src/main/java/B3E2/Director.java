@@ -14,7 +14,7 @@ public class Director {
 
     //lista de nombres de clase para comprobar  que las clases
 
-    private final ArrayList<String> nombreclases = new ArrayList<>(Arrays.asList("Accion","Actor","Comedia","ComediaNegra","ComediaRomantica","Ficcion","Guerra","Parodia","Psicologico","Robos","Terror","TerrorGotico","Thriller","Zombies"));
+    private final ArrayList<String> nombreclases = new ArrayList<>(Arrays.asList("Accion","Comedia","ComediaNegra","ComediaRomantica","Ficcion","Guerra","Parodia","Psicologico","Robos","Terror","TerrorGotico","Thriller","Zombies"));
 
 
     /*Constructor*/
@@ -111,13 +111,12 @@ public class Director {
 
         for(Pelicula pelicula : this.peliculas){
             //devolvemos
-            if(pelicula.actoresDirigidos(this.getNombre()).containsKey(actor)){
+            if(pelicula.actoresDirigidos(this).containsKey(actor)){
                 contador++;
             }
         }
 
         return contador;
-
 
     }
 
@@ -139,8 +138,9 @@ public class Director {
                 generos.clear();
                 generos.add(genero);
             //si hay algun valor igual al genero que ya tenemos, lo añadimos
-            }else if(this.cache.get(genero) == maximo) generos.add(genero);
-
+            }else if(this.cache.get(genero) == maximo) {
+                generos.add(genero);
+            }
         }
 
         return generos;
@@ -162,7 +162,7 @@ public class Director {
 
         for(Pelicula peli : this.peliculas){
             //como presupuesto es un float(tengo presupuesto como protected)
-            if(peli.getPresupuesto()>minimo) peliculasMas.put(peli.getNombre(),peli);
+            if(peli.recaudacionTotal()>minimo) peliculasMas.put(peli.getNombre(),peli);
         }
 
         return peliculasMas;
@@ -194,6 +194,15 @@ public class Director {
             return false;
         }
         return true;
+    }
+
+    private String imprimirCache() { //funcion que me permite imprimir las peliculas en el to string
+        String dato = "";
+
+        for (String genero : this.cache.keySet()){
+            dato+="\t\t{ "+"\""+genero+"\""+", "+"\""+this.cache.get(genero)+"\" },\n";
+        }
+        return dato;
     }
 
     private String imprimirPeliculas() { //funcion que me permite imprimir las peliculas en el to string
@@ -233,7 +242,7 @@ public class Director {
     public String toString(){
         return "{\n" //si se cumple la condicion imprime lo que queremos y si no imprime lo que le mandamos (nada en este caso)
                 + (this.nombre!=null ? " \"nombre\" : \"" +  this.nombre + "\",\n" : "")
-                + (!this.cache.isEmpty() ? " \"cache\" : \"" +  this.cache + "\",\n" : "")
+                + (!this.cache.isEmpty() ? " \"cache\" :  [\n" +  imprimirCache() + "\t\t],\n" : "")
                 + (!this.peliculas.isEmpty() ? " \"peliculas\" : " +  imprimirPeliculas() + ",\n" : "")
                 + (!this.especialista.isEmpty() ? " \"especialista\" : \"" +  imprimirespecialista() + "\",\n" : "")
                 + "}";
