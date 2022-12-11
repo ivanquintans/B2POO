@@ -2,13 +2,13 @@ package B4E1;
 
 import java.util.*;
 
-public class Actor {
+public class Actor implements IActor {
 
     private String nombre;
 
     private ArrayList<String> deseos;
 
-    private HashMap<String,Pelicula> peliculas;
+    private HashMap<String,IPelicula> peliculas;
 
     private float cache;
 
@@ -84,7 +84,7 @@ public class Actor {
         return nombre;
     }
 
-    public HashMap<String, Pelicula> getPeliculas() {
+    public HashMap<String, IPelicula> getPeliculas() {
         return peliculas;
     }
 
@@ -94,7 +94,7 @@ public class Actor {
      * añadimos una nueva pelicula al actor
      * @param pelicula
      */
-    public void introducirPelicula(Pelicula pelicula){
+    public void introducirPelicula(IPelicula pelicula){
 
         //si la pelicula que le pasamos es una pelicula valida
         if(pelicula!=null){
@@ -108,15 +108,15 @@ public class Actor {
      * @param genero
      * @return devuelve un set con todas las peliculas con el genero que indiquemos en las que haya participado el actor
      */
-    public Set<Pelicula> peliculasDeGenero(String genero){
+    public Set<IPelicula> peliculasDeGenero(String genero){
 
-        Set<Pelicula> solucion = new HashSet<>();
+        Set<IPelicula> solucion = new HashSet<>();
 
         if (genero==null){
             return solucion;
         }
 
-        for (Pelicula pelicula : this.peliculas.values()) {
+        for (IPelicula pelicula : this.peliculas.values()) {
             //si el nombre de la clase a la que pertence pelicula es igual al genero
             if (pelicula.getClass().getSimpleName().equals(genero)) {
                 //añadimos la pelicula
@@ -132,18 +132,18 @@ public class Actor {
      * @param genero
      * @return un arraylist de peliculas que hayan sido un fracaso
      */
-    public ArrayList<Pelicula> peliculasFracaso(String genero) {
+    public ArrayList<IPelicula> peliculasFracaso(String genero) {
 
-        ArrayList<Pelicula> peliculas = new ArrayList<>();
+        ArrayList<IPelicula> peliculas = new ArrayList<>();
 
         if(genero==null){
             return peliculas;
         }
         //con la funcion que creamos anteriormente obtenemos un set formado por las peliculas del genero que se le pasa por argumento
-        Set<Pelicula> peliculasdeGenero = this.peliculasDeGenero(genero);
+        Set<IPelicula> peliculasdeGenero = this.peliculasDeGenero(genero);
         // recorremos este array para ver cuales de este peli han sido un fracaso
 
-        for(Pelicula pelicula : peliculasdeGenero){
+        for(IPelicula pelicula : peliculasdeGenero){
             //si las peliculas no fueron un exito añadimoos estas al array list.
             if(!pelicula.exito()){
                 peliculas.add(pelicula);
@@ -170,10 +170,10 @@ public class Actor {
         }
 
         //recorremos las peliculas en las que participo el actor
-        for (Pelicula peliculas : this.peliculas.values()) {
+        for (IPelicula peliculas : this.peliculas.values()) {
             //vemos los actores que han participado en las peliculas.
             //recorremos los actores de la pelicula con el tipo que pasamos
-            for (Actor actor : peliculas.getActores().get(tipoParticipacion).values()) {
+            for (IActor actor : peliculas.getActores().get(tipoParticipacion).values()) {
                 if (actor.equals(this)) {
                     //si el actor esta en la pelicula como actor de ese tipo aumentamos el contador.
                     contador++;
@@ -197,9 +197,9 @@ public class Actor {
         int contadorPeliculas=0;
         float ganancias=0f;
 
-        Map.Entry<String,Pelicula> peliculas;
+        Map.Entry<String,IPelicula> peliculas;
 
-        Iterator<Map.Entry<String,Pelicula>> iterador = this.peliculas.entrySet().iterator();
+        Iterator<Map.Entry<String,IPelicula>> iterador = this.peliculas.entrySet().iterator();
 
         while (iterador.hasNext()){
             peliculas=iterador.next();
@@ -226,7 +226,7 @@ public class Actor {
         for(String deseo : this.deseos) {
             //si en todas las peliculas que recorremos no esta el director lo ñadimos
             boolean flag =true;
-            for (Pelicula pelicula : this.peliculas.values()) {
+            for (IPelicula pelicula : this.peliculas.values()) {
                 if (deseo.equals(pelicula.getDirector().getNombre())) flag=false;
 
             }
@@ -273,7 +273,7 @@ public class Actor {
         //controlar la coma
         boolean flag=false;
 
-        for (Pelicula i :this.peliculas.values()) {
+        for (IPelicula i :this.peliculas.values()) {
             if(flag){
                 dato+= ",";
             }

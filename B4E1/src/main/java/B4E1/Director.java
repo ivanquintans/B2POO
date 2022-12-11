@@ -2,13 +2,13 @@ package B4E1;
 
 import java.util.*;
 
-public class Director {
+public class Director implements IDirector {
 
     private String nombre;
 
     private HashMap<String,Float> cache;
 
-    private ArrayList<Pelicula> peliculas;
+    private ArrayList<IPelicula> peliculas;
 
     private Set<String> especialista;
 
@@ -67,7 +67,7 @@ public class Director {
         return cache;
     }
 
-    public ArrayList<Pelicula> getPeliculas() {
+    public ArrayList<IPelicula> getPeliculas() {
         return peliculas;
     }
 
@@ -82,7 +82,7 @@ public class Director {
      * necesario si es especialista en ese genero
      * @param pelicula
      */
-    public void introducirPelicula(Pelicula pelicula){
+    public void introducirPelicula(IPelicula pelicula){
 
         if(pelicula!=null){
             if(!this.peliculas.contains(pelicula)) {
@@ -109,7 +109,7 @@ public class Director {
             return contador;
         }
 
-        for(Pelicula pelicula : this.peliculas){
+        for(IPelicula pelicula : this.peliculas){
             //devolvemos
             if(pelicula.actoresDirigidos(this).containsKey(actor)){
                 contador++;
@@ -152,15 +152,15 @@ public class Director {
      * @param minimo
      * @return un hash map con las peliculas que han tenido un beneficio mayor a una determinada cantidad
      */
-    public HashMap<String,Pelicula> peliculasMasBeneficio(float minimo){
+    public HashMap<String,IPelicula> peliculasMasBeneficio(float minimo){
 
-        HashMap<String,Pelicula> peliculasMas = new HashMap<>();
+        HashMap<String,IPelicula> peliculasMas = new HashMap<>();
 
         //no puedo comprobar si el minimo es distint de null
         //devolvemos vacio el hashmap ya que no hay peliculas
         if(minimo<=0) return peliculasMas;
 
-        for(Pelicula peli : this.peliculas){
+        for(IPelicula peli : this.peliculas){
             //como presupuesto es un float(tengo presupuesto como protected)
             if(peli.recaudacionTotal()>minimo) peliculasMas.put(peli.getNombre(),peli);
         }
@@ -211,7 +211,7 @@ public class Director {
         //controlar la coma
         boolean flag=false;
 
-        for (Pelicula i :this.peliculas) {
+        for (IPelicula i :this.peliculas) {
             if(flag){
                 dato+= ",";
             }
