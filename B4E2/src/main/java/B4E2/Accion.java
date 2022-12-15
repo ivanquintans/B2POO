@@ -1,13 +1,13 @@
-package B3E2;
+package B4E2;
 
 import java.util.HashMap;
 
 public abstract class Accion extends Pelicula {
 
 
-    public Accion(String nombre, Integer anho, Integer duracion, Director director, HashMap<String, Float> recaudacion) {
+    public Accion(String nombre, Integer anho, Integer duracion, IDirector director, HashMap<String, Float> recaudacion) throws ExcepcionPelicula {
         super(nombre, anho, duracion, director, recaudacion);
-        }
+    }
 
     public boolean exito(){
 
